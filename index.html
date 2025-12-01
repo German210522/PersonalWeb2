@@ -37,13 +37,13 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-color: #050505; /* Un negro un poco más profundo */
+            background-color: #050505; 
             z-index: 10000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* Salida más elegante */
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         .login-box {
@@ -83,13 +83,12 @@
             color: #fff;
         }
 
-        /* Estilo tipo consola para los mensajes de estado */
         .status-text {
             color: var(--dark-accent);
             margin-top: 10px;
-            font-family: 'JetBrains Mono', monospace; /* Fuente tipo código */
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
-            height: 20px; /* Altura fija para evitar saltos */
+            height: 20px;
         }
 
         .loading-bar-container {
@@ -108,7 +107,6 @@
             background: var(--accent-color);
             border-radius: 10px;
             box-shadow: 0 0 10px var(--accent-color);
-            /* Quitamos la transición CSS para controlarla con JS frame a frame */
         }
 
         .percentage {
@@ -190,15 +188,33 @@
             color: #fff;
         }
 
+        /* --- AQUÍ ESTÁ EL CAMBIO PRINCIPAL (TEXTO CON LUCES) --- */
         .text-animate h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: transparent;
-            -webkit-text-stroke: 1px var(--accent-color);
-            background-image: linear-gradient(var(--accent-color), var(--accent-color));
-            background-repeat: no-repeat;
-            -webkit-background-clip: text;
-            background-position: -33rem 0;
+            text-transform: uppercase;
+            color: transparent; /* Texto transparente para ver el fondo */
+            
+            /* Fondo degradado: Cian -> Blanco -> Cian */
+            background: linear-gradient(
+                90deg,
+                var(--accent-color) 0%,
+                #ffffff 50%,
+                var(--accent-color) 100%
+            );
+            
+            background-size: 200% auto; /* Tamaño doble para poder moverlo */
+            -webkit-background-clip: text; /* Recorta el fondo con la forma del texto */
+            background-clip: text;
+            
+            /* Animación de movimiento */
+            animation: light-shimmer 2.5s linear infinite;
+        }
+
+        /* Keyframes para mover la luz */
+        @keyframes light-shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
         }
 
         .home-content p {
@@ -238,20 +254,18 @@
             text-align: center;
         }
 
-       /* Agrega esto en tu zona de <style> */
-
         .profile-pic {
             width: 280px;
             height: 280px;
-            border-radius: 50%; /* Esto la hace redonda */
-            object-fit: cover; /* Evita que la foto se estire feo */
-            border: 4px solid var(--accent-color); /* Borde cian */
-            box-shadow: 0 0 30px rgba(102, 252, 241, 0.5); /* Resplandor neón */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(102, 252, 241, 0.5);
             transition: transform 0.5s ease;
         }
 
         .profile-pic:hover {
-            transform: scale(1.05) rotate(5deg); /* Efecto al pasar el mouse */
+            transform: scale(1.05) rotate(5deg);
         }
 
         .about-content {
