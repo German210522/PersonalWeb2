@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio | German</title>
+    <meta name="description" content="Portafolio de German Juárez - Desarrollador Full Stack e Ingeniero en Sistemas.">
+    <meta name="author" content="German Juárez">
+    
+    <meta property="og:title" content="Portafolio Profesional | German Juárez">
+    <meta property="og:description" content="Ingeniero en Sistemas y Desarrollador Full Stack. Mira mis proyectos y servicios aquí.">
+    <meta property="og:image" content="https://german210522.github.io/PersonalWeb2/Imagenes/perfil2.png">
+    <meta property="og:url" content="https://german210522.github.io/PersonalWeb2/">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="Imagenes/safecamg.png">
+
+    <title>Portafolio | German Juárez</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- VARIABLES Y RESET --- */
@@ -16,19 +29,8 @@
             --dark-accent: #45a29e;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden; /* Vital para evitar scroll horizontal */
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; font-size: 16px; }
 
         /* --- PANTALLA DE CARGA --- */
         #intro-overlay {
@@ -38,150 +40,212 @@
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
         .login-box { text-align: center; width: 100%; max-width: 400px; padding: 20px; }
+        
         .user-avatar {
-            width: 90px; height: 90px; background: #151515; border-radius: 50%;
-            margin: 0 auto 25px; border: 2px solid var(--accent-color);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2.5rem; color: #fff; font-weight: bold;
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.2); animation: pulse-glow 2s infinite;
+            width: 120px; height: 120px; /* Ligeramente más grande */
+            background: #151515; border-radius: 50%;
+            margin: 0 auto 25px; border: 3px solid var(--accent-color);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.3); animation: pulse-glow 2s infinite;
         }
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(102, 252, 241, 0); }
+            70% { box-shadow: 0 0 0 20px rgba(102, 252, 241, 0); }
             100% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0); }
         }
-        .welcome-text { font-size: 1.8rem; margin-bottom: 5px; color: #fff; }
-        .status-text { color: var(--dark-accent); margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; height: 20px; }
-        .loading-bar-container {
-            width: 100%; height: 6px; background: #222; margin-top: 20px;
-            border-radius: 10px; overflow: hidden; position: relative;
-        }
+        .welcome-text { font-size: 2rem; margin-bottom: 5px; color: #fff; }
+        .status-text { color: var(--dark-accent); margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1rem; height: 20px; }
+        .loading-bar-container { width: 100%; height: 8px; background: #222; margin-top: 25px; border-radius: 10px; overflow: hidden; }
         .loading-bar { width: 0%; height: 100%; background: var(--accent-color); border-radius: 10px; box-shadow: 0 0 10px var(--accent-color); }
-        .percentage { color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 8px; display: block; text-align: right; }
+        .percentage { color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-top: 10px; display: block; text-align: right; }
+
+        /* --- MODAL DE ÉXITO --- */
+        #success-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 10001; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: var(--secondary-bg); padding: 50px; border-radius: 20px; text-align: center;
+            border: 2px solid var(--accent-color); box-shadow: 0 0 40px rgba(102, 252, 241, 0.3);
+            max-width: 450px; width: 90%; animation: popIn 0.3s ease-out;
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-icon { font-size: 5rem; color: var(--accent-color); margin-bottom: 25px; }
+        .modal-title { font-size: 2.2rem; margin-bottom: 15px; color: #fff; }
+        .modal-text { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
+        .close-btn {
+            background: var(--accent-color); color: #0b0c10; border: none; padding: 12px 35px;
+            font-weight: bold; font-size: 1.1rem; border-radius: 5px; cursor: pointer; transition: .3s;
+        }
+        .close-btn:hover { background: #fff; box-shadow: 0 0 20px var(--accent-color); }
+
+        /* --- BOTÓN SUBIR --- */
+        #scrollTopBtn {
+            display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99;
+            font-size: 1.8rem; border: none; outline: none; background-color: var(--accent-color);
+            color: #0b0c10; cursor: pointer; padding: 12px 18px; border-radius: 12px;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4); transition: 0.3s;
+        }
+        #scrollTopBtn:hover { background-color: #fff; transform: translateY(-5px); }
 
         /* --- HEADER & NAV --- */
         header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            /* Padding base para escritorio: Arriba/Abajo 20px, Lados 9% */
-            padding: 20px 9%; 
+            position: fixed; top: 0; left: 0; width: 100%; padding: 25px 8%; 
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(11, 12, 16, 0.95); backdrop-filter: blur(10px);
-            z-index: 100; border-bottom: 1px solid rgba(102, 252, 241, 0.1);
-            transition: padding 0.3s; /* Suavizar cambio de tamaño */
+            z-index: 100; border-bottom: 1px solid rgba(102, 252, 241, 0.1); transition: padding 0.3s;
         }
-        .logo {
-            font-size: 1.5rem; font-weight: 700; color: var(--accent-color);
-            text-transform: uppercase; letter-spacing: 2px; text-decoration: none;
-        }
-        .navbar a {
-            font-size: 1rem; color: #fff; text-decoration: none; font-weight: 500;
-            margin-left: 35px; transition: .3s;
-        }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; letter-spacing: 2px; text-decoration: none; }
+        .navbar a { font-size: 1.1rem; color: #fff; text-decoration: none; font-weight: 500; margin-left: 40px; transition: .3s; }
         .navbar a:hover, .navbar a.active { color: var(--accent-color); }
-        #menu-icon { font-size: 2.5rem; color: #fff; display: none; cursor: pointer; }
+        #menu-icon { font-size: 2.8rem; color: #fff; display: none; cursor: pointer; }
 
         /* --- SECCIONES COMUNES --- */
-        /* Padding base escritorio: 100px vertical, 9% horizontal (igual que el header) */
-        section { padding: 100px 9%; min-height: 100vh; }
-
-        /* HOME */
-        #home { display: flex; align-items: center; }
-        .home-content h3 { font-size: 1.5rem; font-weight: 400; }
-        .home-content h1 { font-size: 4rem; font-weight: 700; line-height: 1.2; color: #fff; }
+        section { padding: 120px 8%; min-height: 100vh; }
+        .heading { font-size: 3.5rem; text-align: center; margin-bottom: 60px; }
         
-        /* Animación Luces Texto */
-        .text-animate h3 {
-            font-size: 2.2rem; font-weight: 800; text-transform: uppercase; color: transparent;
+        /* Efecto Brillo Texto */
+        .text-animate h3, .heading span {
+            font-size: 2.5rem; font-weight: 800; text-transform: uppercase; color: transparent;
             background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
             background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
             animation: light-shimmer 2.5s linear infinite;
         }
+        .heading span { font-size: inherit; font-weight: inherit; }
         @keyframes light-shimmer { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
 
-        .home-content p { margin: 20px 0 40px; max-width: 600px; }
-        .btn-box {
-            display: inline-block; padding: 12px 28px; background: var(--accent-color);
-            border-radius: 5px; font-weight: 600; color: var(--bg-color); text-decoration: none;
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.4); transition: .3s;
+        /* --- ESTILOS SECCIÓN ARQUITECTURA (AGRANDADO) --- */
+        #stack-details { background-color: #0f1115; text-align: center; }
+        .stack-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Tarjetas más anchas */
+            gap: 40px; margin-top: 60px; 
         }
+        .stack-card {
+            background: #161b22; 
+            padding: 50px 35px; /* Más relleno interno */
+            border-radius: 20px; border-bottom: 5px solid transparent;
+            transition: all 0.4s ease; text-align: left; position: relative; overflow: hidden;
+        }
+        .stack-card:hover { border-bottom: 5px solid var(--accent-color); transform: translateY(-12px); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        
+        .stack-icon { font-size: 4.5rem; /* Icono Gigante */ color: var(--accent-color); margin-bottom: 30px; display: inline-block; }
+        .stack-card h3 { font-size: 2rem; /* Título Gigante */ color: #fff; margin-bottom: 20px; }
+        .stack-card p { font-size: 1.15rem; /* Texto más grande */ color: #a0a0a0; line-height: 1.8; margin-bottom: 25px; }
+        
+        .stack-tags { display: flex; flex-wrap: wrap; gap: 12px; }
+        .tech-tag {
+            background: rgba(102, 252, 241, 0.1); color: var(--accent-color); padding: 8px 15px;
+            border-radius: 25px; font-size: 0.95rem; font-weight: 600; font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* HOME */
+        #home { display: flex; align-items: center; }
+        .home-content h3 { font-size: 1.8rem; font-weight: 400; }
+        .home-content h1 { font-size: 5rem; font-weight: 700; line-height: 1.1; color: #fff; margin-bottom: 10px; }
+        .home-content p { margin: 25px 0 45px; max-width: 650px; font-size: 1.1rem; line-height: 1.8; }
+        
+        .btn-box {
+            display: inline-block; padding: 14px 34px; background: var(--accent-color);
+            border-radius: 8px; font-weight: 600; color: var(--bg-color); text-decoration: none;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4); transition: .3s; border: none; cursor: pointer; font-size: 1.1rem;
+        }
+        .btn-box:hover { box-shadow: 0 0 30px var(--accent-color); background: #fff; transform: scale(1.05); }
 
         /* ABOUT */
-        #about { background-color: var(--secondary-bg); display: flex; align-items: center; gap: 50px; }
+        #about { background-color: var(--secondary-bg); display: flex; align-items: center; gap: 60px; }
         .about-img { flex: 1; text-align: center; }
-        .profile-pic {
-            width: 250px; height: 250px; border-radius: 50%; object-fit: cover;
-            border: 4px solid var(--accent-color); box-shadow: 0 0 30px rgba(102, 252, 241, 0.5);
-        }
+        .profile-pic { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-color); box-shadow: 0 0 40px rgba(102, 252, 241, 0.5); }
         .about-content { flex: 1.5; }
-        .heading { font-size: 3rem; text-align: center; margin-bottom: 50px; }
-        .heading span { color: var(--accent-color); }
+        .about-content h3 { font-size: 2rem; margin-bottom: 15px; }
+        .about-content p { font-size: 1.1rem; line-height: 1.8; }
 
-        /* SERVICES */
-        .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .service-box {
-            background: var(--secondary-bg); padding: 30px; border-radius: 10px; text-align: center;
-            border: 1px solid transparent; transition: .4s;
+        /* SERVICES (AGRANDADO) */
+        .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .service-box { 
+            background: var(--secondary-bg); padding: 50px 30px; /* Más grande */
+            border-radius: 15px; text-align: center; border: 1px solid transparent; transition: .4s; 
         }
-        .service-box:hover { border-color: var(--accent-color); transform: scale(1.02); }
-        .service-box i { font-size: 3rem; color: var(--accent-color); margin-bottom: 15px; font-style: normal; }
+        .service-box:hover { border-color: var(--accent-color); transform: scale(1.03); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .service-box i { font-size: 4rem; /* Icono más grande */ color: var(--accent-color); margin-bottom: 20px; }
+        .service-box h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .service-box p { font-size: 1.1rem; line-height: 1.6; }
 
         /* PROJECTS */
-        .portfolio-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .portfolio-box {
-            position: relative; border-radius: 10px; overflow: hidden; display: flex;
-            height: 250px; background: #2c2c2c; align-items: center; justify-content: center;
-            border: 1px solid #333; cursor: pointer;
+        .portfolio-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .portfolio-box { 
+            position: relative; border-radius: 15px; overflow: hidden; display: flex; 
+            height: 300px; /* Más alto */
+            background: #2c2c2c; align-items: center; justify-content: center; border: 1px solid #333; cursor: pointer; 
         }
         .portfolio-layer {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.1), var(--accent-color));
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.1), var(--accent-color));
             display: flex; justify-content: center; align-items: center; flex-direction: column;
-            text-align: center; padding: 0 2rem; transform: translateY(100%); transition: .5s;
+            text-align: center; padding: 0 3rem; transform: translateY(100%); transition: .5s;
         }
         .portfolio-box:hover .portfolio-layer, .portfolio-box.active .portfolio-layer { transform: translateY(0); }
-        .portfolio-layer h4 { font-size: 1.5rem; color: #000; font-weight: bold; }
-        .portfolio-layer p { color: #111; margin-top: 10px; font-weight: 600; }
+        .portfolio-layer h4 { font-size: 1.8rem; color: #000; font-weight: bold; }
+        .portfolio-layer p { color: #111; margin-top: 15px; font-weight: 600; font-size: 1.1rem; }
 
-        /* --- RESPONSIVE MEDIA QUERIES (AQUÍ ESTÁ LA SOLUCIÓN) --- */
-        
-        /* Tablets y Laptops pequeñas */
-        @media (max-width: 991px) {
-            header { padding: 20px 4%; }
-            section { padding: 100px 4%; }
-            .home-content h1 { font-size: 3.5rem; }
-            .heading { font-size: 2.5rem; }
+        /* CONTACTO */
+        #contact { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .contact-content { text-align: center; max-width: 900px; width: 100%; }
+        .contact-container { display: flex; justify-content: center; gap: 30px; margin-top: 50px; margin-bottom: 50px; flex-wrap: wrap; }
+        .contact-card {
+            background: var(--secondary-bg); padding: 30px; border-radius: 15px;
+            text-align: center; min-width: 180px; border: 1px solid #333;
+            text-decoration: none; color: #fff; transition: .3s;
         }
+        .contact-card:hover { border-color: var(--accent-color); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(102, 252, 241, 0.2); }
+        .contact-card i { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
+        .contact-card h4 { margin-bottom: 8px; font-size: 1.2rem; }
+        .contact-card p { font-size: 0.95rem; color: #aaa; }
 
-        /* Celulares (Móvil) */
+        .contact-form {
+            max-width: 700px; margin: 0 auto; background: var(--secondary-bg); padding: 40px;
+            border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; gap: 20px;
+        }
+        .contact-form h3 { margin-bottom: 20px; color: var(--accent-color); font-size: 1.5rem; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 18px; background: #0b0c10; border: 1px solid #333;
+            color: #fff; border-radius: 8px; font-size: 1.1rem; outline: none; transition: .3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); }
+        .contact-form textarea { resize: none; height: 180px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            header { padding: 20px 5%; } section { padding: 100px 5%; }
+            .home-content h1 { font-size: 4rem; } 
+        }
+        
         @media (max-width: 768px) {
-            /* AJUSTE CRÍTICO: Márgenes laterales fijos de 24px para que no se pegue al borde */
-            header { padding: 15px 24px; } 
-            section { padding: 80px 24px; } /* Más espacio a los lados */
-
+            header { padding: 15px 24px; } section { padding: 80px 24px; } 
             #menu-icon { display: block; }
-
             .navbar {
-                position: absolute; top: 100%; left: 0; width: 100%; padding: 1rem 4%;
+                position: absolute; top: 100%; left: 0; width: 100%; padding: 1.5rem 5%;
                 background: #0b0c10; border-top: 1px solid #333; box-shadow: 0 .5rem 1rem rgba(0,0,0,.5);
                 display: none; flex-direction: column;
             }
             .navbar.active { display: flex; }
-            .navbar a {
-                display: block; font-size: 1.2rem; margin: 1.5rem 0; color: #fff;
-                border-bottom: 1px solid #333; padding-bottom: 10px;
-            }
-
-            /* REDUCCIÓN DE FUENTES PARA MÓVIL (Evita que el texto se vea gigante) */
-            #home { flex-direction: column; padding-top: 130px; align-items: flex-start; } /* Alinear izquierda o centro */
-            .home-content h3 { font-size: 1.2rem; }
-            .home-content h1 { font-size: 2.6rem; } /* Mucho más pequeño que en PC */
-            .text-animate h3 { font-size: 1.5rem; }
-            .home-content p { font-size: 0.9rem; }
-
-            #about { flex-direction: column; }
-            .about-img { margin-bottom: 30px; width: 100%; }
-            .profile-pic { width: 200px; height: 200px; }
-            .heading { font-size: 2.2rem; }
+            .navbar a { display: block; font-size: 1.3rem; margin: 1.5rem 0; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; }
+            
+            #home, #about, #stack-details { flex-direction: column; padding-top: 140px; text-align: center; } 
+            
+            .home-content h1 { font-size: 3rem; margin-bottom: 15px; } 
+            .home-content h3 { font-size: 1.5rem; }
+            .text-animate h3 { font-size: 1.8rem; }
+            
+            .about-img { margin-bottom: 40px; width: 100%; }
+            .profile-pic { width: 220px; height: 220px; margin: 0 auto; }
+            
+            .contact-container { flex-direction: column; width: 100%; } 
+            .contact-card { width: 100%; margin-bottom: 10px; }
+            
+            .stack-card { text-align: center; padding: 40px 20px; } /* Centrado en móvil */
+            .stack-tags { justify-content: center; }
+            
+            .heading { font-size: 2.5rem; margin-bottom: 40px; }
         }
     </style>
 </head>
@@ -189,7 +253,9 @@
 
     <div id="intro-overlay">
         <div class="login-box">
-            <div class="user-avatar">G</div> 
+            <div class="user-avatar">
+                <img src="Imagenes/safecam.jpeg" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div> 
             <h2 class="welcome-text">Bienvenido.</h2>
             <p class="status-text" id="status-msg">Inicializando...</p>
             <div class="loading-bar-container">
@@ -199,14 +265,27 @@
         </div>
     </div>
 
+    <div id="success-modal">
+        <div class="modal-content">
+            <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
+            <h2 class="modal-title">¡Gracias!</h2>
+            <p class="modal-text">El formulario ha sido enviado con éxito.</p>
+            <button class="close-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="scrollTopBtn" title="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+
     <header>
-        <a href="#" class="logo">German.Dev</a>
-        <div id="menu-icon">☰</div>
+        <a href="#home" class="logo">German.Dev</a>
+        <div id="menu-icon"><i class="fas fa-bars"></i></div>
         <nav class="navbar">
             <a href="#home">Inicio</a>
             <a href="#about">Sobre mí</a>
+            <a href="#stack-details">Arquitectura</a>
             <a href="#services">Servicios</a>
             <a href="#portfolio">Proyectos</a>
+            <a href="#contact">Contacto</a>
         </nav>
     </header>
 
@@ -218,7 +297,10 @@
                 <h3>Desarrollador Full Stack</h3>
             </div>
             <p>Especialista en crear soluciones tecnológicas de alto impacto. Diseño arquitecturas robustas y experiencias de usuario fluidas.</p>
-            <a href="#about" class="btn-box">Ver Perfil</a>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;"> <a href="#contact" class="btn-box">Contratar</a>
+                <a href="https://github.com/German210522" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/german-juárez-23b990311?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
     </section>
 
@@ -229,96 +311,140 @@
         <div class="about-content">
             <h2 class="heading">Acerca de <span>Mí</span></h2>
             <h3>¡Desarrollador comprometido!</h3>
-            <p>
-                Soy German, un apasionado por la innovación.
-                Transformo problemas complejos en interfaces sencillas.
-            </p>
-            <a href="https://drive.google.com/file/d/1rAkEJ9HfDCZtiikelckrQFbJcwq_XCdM/view?usp=sharing" class="btn-box">Descargar CV</a>
+            <p>Soy German, un apasionado por la innovación. Transformo problemas complejos en interfaces sencillas. Tengo experiencia en desarrollo web, redes y sistemas de seguridad.</p>
+            <a href="https://drive.google.com/file/d/1ArnZzXLvQqk4hUNw4W_ajC21fmgmWCVJ/view?usp=sharing" class="btn-box">Descargar CV</a>
+        </div>
+    </section>
+
+    <section id="stack-details">
+        <h2 class="heading">Mi Arquitectura <span>Full Stack</span></h2>
+        <p style="max-width: 800px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #ccc;">
+            Diseño soluciones completas combinando la lógica robusta del servidor con la experiencia visual del cliente.
+        </p>
+
+        <div class="stack-grid">
+            <div class="stack-card">
+                <i class="fas fa-layer-group stack-icon"></i>
+                <h3>Ingeniería Frontend</h3>
+                <p>Desarrollo interfaces visuales interactivas y responsivas. Me enfoco en UX y rendimiento.</p>
+                <div class="stack-tags">
+                    <span class="tech-tag">HTML5 / CSS3</span>
+                    <span class="tech-tag">JavaScript ES6+</span>
+                    <span class="tech-tag">React / Vue</span>
+                </div>
+            </div>
+            <div class="stack-card">
+                <i class="fas fa-server stack-icon"></i>
+                <h3>Desarrollo Backend</h3>
+                <p>Construyo APIs seguras y escalables, gestionando autenticación y lógica de negocio.</p>
+                <div class="stack-tags">
+                    <span class="tech-tag">C# / .NET</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">API RESTful</span>
+                </div>
+            </div>
+            <div class="stack-card">
+                <i class="fas fa-database stack-icon"></i>
+                <h3>Gestión de Datos</h3>
+                <p>Diseño estructuras de bases de datos relacionales y no relacionales, asegurando la integridad de datos.</p>
+                <div class="stack-tags">
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Firebase</span>
+                </div>
+            </div>
+            <div class="stack-card">
+                <i class="fas fa-code-branch stack-icon"></i>
+                <h3>DevOps & Herramientas</h3>
+                <p>Uso metodologías ágiles y control de versiones para mantener el código organizado.</p>
+                <div class="stack-tags">
+                    <span class="tech-tag">Git / GitHub</span>
+                    <span class="tech-tag">VS Code</span>
+                    <span class="tech-tag">Terminal</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="services">
         <h2 class="heading">Mis <span>Servicios</span></h2>
         <div class="services-container">
-            <div class="service-box">
-                <i>💻</i>
-                <h3>Desarrollo Web</h3>
-                <p>Sitios y aplicaciones web optimizadas y escalables.</p>
-            </div>
-            <div class="service-box">
-                <i>🛡️</i>
-                <h3>Seguridad</h3>
-                <p>Implementación de buenas prácticas y protección de datos.</p>
-            </div>
-            <div class="service-box">
-                <i>🚀</i>
-                <h3>Consultoría</h3>
-                <p>Asesoramiento técnico para llevar tu idea al siguiente nivel.</p>
-            </div>
+            <div class="service-box"><i class="fas fa-laptop-code"></i><h3>Desarrollo Web</h3><p>Sitios y aplicaciones web optimizadas y escalables.</p></div>
+            <div class="service-box"><i class="fas fa-shield-alt"></i><h3>Seguridad</h3><p>Implementación de buenas prácticas y protección de datos.</p></div>
+            <div class="service-box"><i class="fas fa-rocket"></i><h3>Consultoría</h3><p>Asesoramiento técnico para llevar tu idea al siguiente nivel.</p></div>
+            <div class="service-box"><i class="fas fa-video"></i><h3>Cámaras CCTV</h3><p>Instalación profesional y configuración de monitoreo remoto.</p></div>
         </div>
     </section>
 
     <section id="portfolio">
         <h2 class="heading">Portafolio de <span>German</span></h2>
-        <p style="text-align:center; margin-bottom:20px; color:gray; font-size: 0.9rem;">(Toca las tarjetas para ver detalles)</p>
+        <p style="text-align:center; margin-bottom:20px; color:gray; font-size: 1rem;">(Toca las tarjetas para ver detalles)</p>
         <div class="portfolio-container">
-            <div class="portfolio-box">
-                <div class="portfolio-layer">
-                    <h4>Proyecto Alpha</h4>
-                    <p>Plataforma de gestión.</p>
-                </div>
+            <div class="portfolio-box"><div class="portfolio-layer"><h4>Proyecto Alpha</h4><p>Plataforma de gestión.</p></div></div>
+            <div class="portfolio-box"><div class="portfolio-layer"><h4>Proyecto Beta</h4><p>App de delivery.</p></div></div>
+            <div class="portfolio-box"><div class="portfolio-layer"><h4>Proyecto Gamma</h4><p>Dashboard analítico.</p></div></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="heading">Contáctame <span>Ahora</span></h2>
+        <div class="contact-content">
+            <p style="font-size: 1.1rem;">¿Tienes un proyecto en mente? ¡Hablemos! Estoy disponible para trabajos freelance y consultorías.</p>
+            
+            <div class="contact-container">
+                <a href="https://wa.me/+50232349880" target="_blank" class="contact-card"><i class="fab fa-whatsapp"></i><h4>WhatsApp</h4><p>Enviar mensaje</p></a>
+                <a href="https://www.linkedin.com/in/german-juárez-23b990311" target="_blank" class="contact-card"><i class="fab fa-linkedin-in"></i><h4>LinkedIn</h4><p>Conectemos</p></a>
+                <a href="https://github.com/German210522" target="_blank" class="contact-card"><i class="fab fa-github"></i><h4>GitHub</h4><p>Ver código</p></a>
             </div>
-            <div class="portfolio-box">
-                <div class="portfolio-layer">
-                    <h4>Proyecto Beta</h4>
-                    <p>App de delivery.</p>
-                </div>
-            </div>
-            <div class="portfolio-box">
-                <div class="portfolio-layer">
-                    <h4>Proyecto Gamma</h4>
-                    <p>Dashboard analítico.</p>
-                </div>
-            </div>
+
+            <form id="contact-form" action="https://formspree.io/f/xovglldo" method="POST" class="contact-form">
+                <h3>O envíame un correo directo:</h3>
+                <input type="text" name="name" placeholder="Tu Nombre Completo" required>
+                <input type="email" name="email" placeholder="Tu Correo Electrónico" required>
+                <textarea name="message" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                <button type="submit" class="btn-box" style="width: 100%;">Enviar Mensaje</button>
+                <p id="form-status" style="margin-top: 10px; color: var(--accent-color); display: none;">Enviando...</p>
+            </form>
         </div>
     </section>
 
     <footer style="text-align: center; padding: 20px; background: #000; color: #555;">
-        <p>Copyright © 2024 German. Todos los derechos reservados.</p>
+        <p>Copyright © <span id="year"></span> German Juárez. Todos los derechos reservados.</p>
     </footer>
 
     <script>
+        // PANTALLA DE CARGA
         window.addEventListener('load', () => {
             const bar = document.getElementById('progress-bar');
             const percentText = document.getElementById('percentage-num');
             const statusMsg = document.getElementById('status-msg');
             const overlay = document.getElementById('intro-overlay');
-
             let width = 0;
             const timer = setInterval(() => {
-                width += 2; 
-                if (width >= 100) {
-                    width = 100;
-                    clearInterval(timer);
-                    setTimeout(() => { overlay.style.transform = 'translateY(-100%)'; }, 500);
-                }
-                bar.style.width = width + '%';
-                percentText.innerText = Math.floor(width) + '%';
-                if (width < 30) statusMsg.innerText = "Inicializando...";
-                else if (width < 60) statusMsg.innerText = "Cargando recursos...";
-                else statusMsg.innerText = "¡Listo!";
+                width += 2; if (width >= 100) { width = 100; clearInterval(timer); setTimeout(() => { overlay.style.transform = 'translateY(-100%)'; }, 500); }
+                bar.style.width = width + '%'; percentText.innerText = Math.floor(width) + '%';
+                if (width < 30) statusMsg.innerText = "Inicializando..."; else if (width < 60) statusMsg.innerText = "Cargando recursos..."; else statusMsg.innerText = "¡Listo!";
             }, 30);
         });
 
+        // MENU
         let menuIcon = document.querySelector('#menu-icon');
         let navbar = document.querySelector('.navbar');
-
         menuIcon.onclick = () => { navbar.classList.toggle('active'); };
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.onclick = () => { navbar.classList.remove('active'); };
-        });
+        document.querySelectorAll('.navbar a').forEach(link => { link.onclick = () => { navbar.classList.remove('active'); }; });
 
-        // Tap para iOS
+        // AÑO AUTOMÁTICO
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+
+        // BOTÓN SUBIR
+        let mybutton = document.getElementById("scrollTopBtn");
+        window.onscroll = function() { scrollFunction() };
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) { mybutton.style.display = "block"; } else { mybutton.style.display = "none"; }
+        }
+        function topFunction() { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; }
+
+        // IOS TAP
         const portfolioBoxes = document.querySelectorAll('.portfolio-box');
         portfolioBoxes.forEach(box => {
             box.addEventListener('click', () => {
@@ -326,6 +452,29 @@
                 box.classList.toggle('active');
             });
         });
+
+        // FORMULARIO AJAX
+        var form = document.getElementById("contact-form");
+        var statusTxt = document.getElementById("form-status");
+        async function handleSubmit(event) {
+            event.preventDefault();
+            statusTxt.style.display = 'block'; statusTxt.innerHTML = "Enviando...";
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method, body: data, headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    statusTxt.style.display = 'none'; form.reset();
+                    document.getElementById('success-modal').style.display = 'flex';
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) { statusTxt.innerHTML = data["errors"].map(error => error["message"]).join(", "); } else { statusTxt.innerHTML = "Hubo un error al enviar. Intenta de nuevo."; }
+                    });
+                }
+            }).catch(error => { statusTxt.innerHTML = "Hubo un error de conexión."; });
+        }
+        form.addEventListener("submit", handleSubmit);
+        function closeModal() { document.getElementById('success-modal').style.display = 'none'; }
     </script>
 </body>
 </html>
