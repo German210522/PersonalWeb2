@@ -5,6 +5,12 @@
     --text-color: #c5c6c7;
     --accent-color: #66fcf1;
     --dark-accent: #45a29e;
+    
+    /* Variables para el slider */
+    --card-width: 350px;
+    --card-gap: 30px;
+    /* Cálculo del ancho total de un set de tarjetas (6 tarjetas) */
+    /* (350 * 6) + (30 * 6) = 2100 + 180 = 2280px */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
@@ -151,7 +157,7 @@ section { padding: 120px 8%; min-height: 100vh; }
 .service-box h3 { font-size: 1.8rem; margin-bottom: 15px; }
 .service-box p { font-size: 1.1rem; line-height: 1.6; }
 
-/* --- PROJECTS (ACTUALIZADO) --- */
+/* --- PROJECTS --- */
 .portfolio-container { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
@@ -169,46 +175,27 @@ section { padding: 120px 8%; min-height: 100vh; }
     justify-content: center; 
     border: 1px solid #333; 
     cursor: pointer;
-    text-decoration: none; /* Quita el subrayado de enlace */
-    color: inherit; /* Mantiene el color del texto */
+    text-decoration: none; 
+    color: inherit; 
 }
 
-/* ESTILO PARA LA IMAGEN DE FONDO */
 .portfolio-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Hace que la imagen llene la caja sin deformarse */
-    transition: transform 0.5s ease; /* Suavidad al hacer zoom */
-    opacity: 0.7; /* Un poco oscura para que resalte si hay texto encima */
+    width: 100%; height: 100%; object-fit: cover; 
+    transition: transform 0.5s ease; opacity: 0.7; 
 }
 
-/* Efecto Zoom al pasar el mouse */
-.portfolio-box:hover img {
-    transform: scale(1.1); /* La imagen crece un poquito */
-    opacity: 0.3; /* Se oscurece más para leer el texto */
-}
+.portfolio-box:hover img { transform: scale(1.1); opacity: 0.3; }
 
 .portfolio-layer {
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
     background: linear-gradient(rgba(0,0,0,0.1), var(--accent-color));
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column;
-    text-align: center; 
-    padding: 0 3rem; 
-    transform: translateY(100%); 
-    transition: .5s;
+    display: flex; justify-content: center; align-items: center; flex-direction: column;
+    text-align: center; padding: 0 3rem; 
+    transform: translateY(100%); transition: .5s;
 }
 
 .portfolio-box:hover .portfolio-layer, 
-.portfolio-box.active .portfolio-layer { 
-    transform: translateY(0); 
-}
+.portfolio-box.active .portfolio-layer { transform: translateY(0); }
 
 .portfolio-layer h4 { font-size: 1.8rem; color: #000; font-weight: bold; }
 .portfolio-layer p { color: #111; margin-top: 15px; font-weight: 600; font-size: 1.1rem; }
@@ -232,6 +219,96 @@ section { padding: 120px 8%; min-height: 100vh; }
 .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); }
 .contact-form textarea { resize: none; height: 180px; }
 
+
+/* --- TESTIMONIOS (NUEVO INFINITE SLIDER) --- */
+#testimonials {
+    background-color: #0f1115;
+    padding: 100px 0; /* Padding vertical, 0 horizontal para que el slider ocupe ancho */
+    overflow: hidden; /* Vital para que no aparezca barra de scroll horizontal en la página */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider-container {
+    width: 100%;
+    margin-top: 40px;
+    position: relative;
+    /* Sombras laterales para difuminar entrada y salida */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.slider-track {
+    display: flex;
+    gap: var(--card-gap);
+    /* Ancho calculado dinámicamente: (350px + 30px) * 12 tarjetas = 4560px */
+    width: calc((var(--card-width) + var(--card-gap)) * 12);
+    animation: scroll 40s linear infinite;
+}
+
+/* Pausar animación al poner el mouse encima */
+.slider-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    /* Mueve la mitad exacta del ancho total (6 tarjetas) para reiniciar el loop invisiblemente */
+    100% { transform: translateX(calc((var(--card-width) + var(--card-gap)) * -6)); }
+}
+
+.testimonial-card {
+    background: #161b22;
+    width: var(--card-width);
+    flex-shrink: 0; /* Evita que se encojan */
+    padding: 40px 30px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    position: relative;
+    text-align: left;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.quote-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.testimonial-card p {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.client-info h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.client-info span {
+    color: var(--dark-accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
     header { padding: 20px 5%; } section { padding: 100px 5%; } .home-content h1 { font-size: 4rem; } 
@@ -250,4 +327,10 @@ section { padding: 120px 8%; min-height: 100vh; }
     .contact-container { flex-direction: column; width: 100%; } .contact-card { width: 100%; margin-bottom: 10px; }
     .stack-card { text-align: center; padding: 40px 20px; } .stack-tags { justify-content: center; }
     .heading { font-size: 2.5rem; margin-bottom: 40px; }
+    
+    /* Ajuste para testimonios en móvil */
+    :root {
+        --card-width: 300px; /* Tarjetas un poco más angostas en móvil */
+    }
+    #testimonials { padding: 60px 0; }
 }
