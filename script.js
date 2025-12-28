@@ -1,186 +1,171 @@
-/* --- 1. PANTALLA DE CARGA (MÁS RÁPIDA) --- */
-window.addEventListener('load', () => {
-    const bar = document.getElementById('progress-bar');
-    const percentText = document.getElementById('percentage-num');
-    const statusMsg = document.getElementById('status-msg');
+/* --- CONTROL DE LA PANTALLA DE CARGA (SIMULACIÓN PREMIUM) --- */
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Referencias a los elementos
     const overlay = document.getElementById('intro-overlay');
+    const progressBar = document.getElementById('progress-bar');
+    const percentageText = document.getElementById('percentage-num');
+    const statusMsg = document.getElementById('status-msg');
 
-    let width = 0;
-    
-    // Intervalo de carga
-    const timer = setInterval(() => {
-        width += 4; 
-        
-        // Actualizar barra y texto visualmente
-        if (bar) bar.style.width = width + '%';
-        if (percentText) percentText.innerText = Math.floor(width) + '%';
-
-        // Mensajes de estado
-        if (statusMsg) {
-            if (width < 30) statusMsg.innerText = "Conectando con el Polo Norte...";
-            else if (width < 60) statusMsg.innerText = "Cargando regalos...";
-            else statusMsg.innerText = "¡Feliz Navidad!";
-        }
-
-        // Finalizar carga
-        if (width >= 100) {
-            width = 100;
-            clearInterval(timer);
-            
-            // Deslizar hacia arriba
-            if (overlay) {
-                setTimeout(() => { 
-                    overlay.style.transform = 'translateY(-100%)'; 
-                }, 200); 
-
-                setTimeout(() => { 
-                    overlay.style.display = 'none'; 
-                }, 1000); 
-            }
-        }
-    }, 20); 
-});
-
-/* --- 2. EFECTO DE NIEVE (SIN BLOQUEAR CLICS) --- */
-document.addEventListener("DOMContentLoaded", function() {
-    const snowContainer = document.createElement('div');
-    snowContainer.style.position = 'fixed';
-    snowContainer.style.top = '0';
-    snowContainer.style.left = '0';
-    snowContainer.style.width = '100%';
-    snowContainer.style.height = '100%';
-    snowContainer.style.pointerEvents = 'none'; // CRUCIAL: Permite hacer clic a través de la nieve
-    snowContainer.style.zIndex = '9999'; 
-    document.body.appendChild(snowContainer);
-
-    function createSnowflake() {
-        const snowflake = document.createElement('div');
-        snowflake.innerHTML = '❄';
-        snowflake.style.position = 'absolute';
-        snowflake.style.color = 'white';
-        snowflake.style.fontSize = Math.random() * 20 + 10 + 'px'; 
-        snowflake.style.left = Math.random() * 100 + 'vw'; 
-        snowflake.style.opacity = Math.random();
-        snowflake.style.top = '-50px';
-        
-        const duration = Math.random() * 3 + 2; 
-        snowflake.style.transition = `top ${duration}s linear, opacity ${duration}s ease-out`;
-        
-        snowContainer.appendChild(snowflake);
-
-        setTimeout(() => {
-            snowflake.style.top = '110vh'; 
-            snowflake.style.opacity = '0'; 
-        }, 50);
-
-        setTimeout(() => {
-            snowflake.remove();
-        }, duration * 1000);
+    // Validación por si acaso no existen los elementos
+    if (!overlay || !progressBar || !percentageText || !statusMsg) {
+        console.log("Elementos de carga no encontrados.");
+        return;
     }
-    
-    // Generar nieve constante
-    setInterval(createSnowflake, 200);
+
+    // Bloquear el scroll mientras carga
+    document.body.style.overflow = 'hidden';
+
+    // 2. Variables de la simulación
+    let progress = 0;
+    const totalTime = 1500; // Tiempo total de la animación en milisegundos (1.5 segundos)
+    const intervalTime = 30; // Cada cuánto actualizamos la barra
+    const increment = 100 / (totalTime / intervalTime); // Cuánto sube el porcentaje por tick
+
+    // 3. Función de Animación
+    const loadingInterval = setInterval(() => {
+        progress += increment;
+
+        // A veces sumamos un poquito extra aleatorio para que se vea "real" (no robótico)
+        if(Math.random() > 0.5) progress += 0.5;
+
+        // Topamos en 100%
+        if (progress >= 100) progress = 100;
+
+        // Actualizamos el ancho de la barra y el número
+        progressBar.style.width = Math.floor(progress) + "%";
+        percentageText.innerText = Math.floor(progress) + "%";
+
+        // Cambiamos el mensaje según el avance
+        if (progress < 20) {
+            statusMsg.innerText = "Conectando con el servidor...";
+        } else if (progress < 50) {
+            statusMsg.innerText = "Cargando módulos de seguridad...";
+        } else if (progress < 80) {
+            statusMsg.innerText = "Optimizando interfaz gráfica...";
+        } else {
+            statusMsg.innerText = "¡Todo listo! Bienvenido.";
+        }
+
+        // 4. Finalización
+        if (progress >= 100) {
+            clearInterval(loadingInterval);
+            
+            // Pequeña pausa al 100% para que el usuario lea "¡Todo listo!"
+            setTimeout(() => {
+                // EFECTO DE SALIDA: Deslizar hacia arriba (aprovechando tu CSS transition)
+                overlay.style.transform = 'translateY(-100%)'; 
+                
+                // Reactivar el scroll del cuerpo
+                document.body.style.overflow = 'auto';
+
+                // (Opcional) Eliminar el div del DOM después de que termine la animación CSS (0.8s)
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 1000);
+
+            }, 500); 
+        }
+
+    }, intervalTime);
 });
 
-/* --- 3. MENÚ HAMBURGUESA --- */
+
+/* --- MENÚ HAMBURGUESA (MÓVIL) --- */
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
-if (menuIcon && navbar) {
-    menuIcon.onclick = () => { navbar.classList.toggle('active'); };
-    document.querySelectorAll('.navbar a').forEach(link => { 
-        link.onclick = () => { navbar.classList.remove('active'); }; 
+if(menuIcon) {
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+}
+
+// Cerrar menú al hacer click en un enlace
+let navLinks = document.querySelectorAll('.navbar a');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if(menuIcon) menuIcon.classList.remove('bx-x');
+        if(navbar) navbar.classList.remove('active');
     });
-}
+});
 
-/* --- 4. AÑO AUTOMÁTICO --- */
-const yearSpan = document.getElementById("year");
-if (yearSpan) {
-    yearSpan.innerHTML = new Date().getFullYear();
-}
 
-/* --- 5. BOTÓN SUBIR (SCROLL UP) --- */
+/* --- BOTÓN IR ARRIBA --- */
 let mybutton = document.getElementById("scrollTopBtn");
-window.onscroll = function() { scrollFunction() };
+
+window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
     if (mybutton) {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) { 
-            mybutton.style.display = "block"; 
-        } else { 
-            mybutton.style.display = "none"; 
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
         }
     }
 }
 
-function topFunction() { 
-    document.body.scrollTop = 0; 
-    document.documentElement.scrollTop = 0; 
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
-/* --- 6. FORMULARIO AJAX (CONTACTO) --- */
-var form = document.getElementById("contact-form");
-var statusTxt = document.getElementById("form-status");
 
-if (form) {
-    async function handleSubmit(event) {
+/* --- MANEJO DEL FORMULARIO DE CONTACTO (FORMSPREE) --- */
+const form = document.getElementById("contact-form");
+const statusTxt = document.getElementById("form-status");
+const successModal = document.getElementById("success-modal");
+
+if(form) {
+    form.addEventListener("submit", async function(event) {
         event.preventDefault();
+        
         if(statusTxt) {
-            statusTxt.style.display = 'block'; 
-            statusTxt.innerHTML = "Enviando carta a Santa...";
+            statusTxt.style.display = "block";
+            statusTxt.innerHTML = "Enviando mensaje...";
+            statusTxt.style.color = "#fff";
         }
 
-        var data = new FormData(event.target);
-        
-        fetch(event.target.action, {
-            method: form.method, 
-            body: data, 
-            headers: { 'Accept': 'application/json' }
-        }).then(response => {
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
             if (response.ok) {
-                if(statusTxt) statusTxt.style.display = 'none'; 
+                if(statusTxt) statusTxt.style.display = "none";
                 form.reset();
-                const successModal = document.getElementById('success-modal');
-                if(successModal) successModal.style.display = 'flex';
+                if(successModal) {
+                    successModal.style.display = "flex"; // Mostrar Modal
+                } else {
+                    alert("¡Gracias! Tu mensaje ha sido enviado.");
+                }
             } else {
-                response.json().then(data => {
-                    if (Object.hasOwn(data, 'errors')) { 
-                        if(statusTxt) statusTxt.innerHTML = data["errors"].map(error => error["message"]).join(", "); 
-                    } else { 
-                        if(statusTxt) statusTxt.innerHTML = "Hubo un error al enviar. Intenta de nuevo."; 
-                    }
-                });
+                if(statusTxt) {
+                    statusTxt.innerHTML = "Hubo un problema al enviar. Intenta de nuevo.";
+                    statusTxt.style.color = "red";
+                }
             }
-        }).catch(error => { 
-            if(statusTxt) statusTxt.innerHTML = "Error de conexión."; 
-        });
-    }
-    form.addEventListener("submit", handleSubmit);
+        } catch (error) {
+            if(statusTxt) {
+                statusTxt.innerHTML = "Error de conexión.";
+                statusTxt.style.color = "red";
+            }
+        }
+    });
 }
 
-function closeModal() { 
-    const successModal = document.getElementById('success-modal');
-    if(successModal) successModal.style.display = 'none'; 
+function closeModal() {
+    if(successModal) successModal.style.display = "none";
 }
-/* --- CÓDIGO DE SEGURIDAD PARA MÓVILES --- */
 
-// Opción 1: Tu código de carga normal (el que ya tienes)
-window.addEventListener('load', function() {
-    const overlay = document.getElementById('intro-overlay');
-    if (overlay) {
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Reactivar scroll
-    }
-});
-
-// Opción 2: El "Seguro de Vida" (Timeout)
-// Si por alguna razón la página tarda más de 3 segundos en cargar,
-// quitamos la pantalla de carga a la fuerza.
-setTimeout(function() {
-    const overlay = document.getElementById('intro-overlay');
-    if (overlay && overlay.style.display !== 'none') {
-        console.log("Carga forzada por tiempo de espera.");
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Asegurar que se pueda bajar
-    }
-}, 3000); // 3000 milisegundos = 3 segundos
+/* --- AÑO AUTOMÁTICO EN FOOTER --- */
+const yearSpan = document.getElementById("year");
+if(yearSpan) {
+    yearSpan.innerText = new Date().getFullYear();
+}
