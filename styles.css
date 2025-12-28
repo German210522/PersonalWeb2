@@ -1,16 +1,22 @@
-/* --- VARIABLES Y RESET --- */
+/* --- VARIABLES Y RESET (MODO NAVIDAD + PROYECTOS ROJOS) --- */
 :root {
-    --bg-color: #0b0c10;
-    --secondary-bg: #1f2833;
-    --text-color: #c5c6c7;
-    --accent-color: #66fcf1;
-    --dark-accent: #45a29e;
+    --bg-color: #050a08; /* Un negro ligeramente verdoso/oscuro */
+    --secondary-bg: #141a17;
+    --text-color: #e0e0e0;
     
-    /* Variables para el slider */
+    /* COLORES NAVIDEÑOS */
+    --accent-color: #d42426; /* Rojo Santa Claus (Testimonios y Botones) */
+    --dark-accent: #165b33;  /* Verde Pino */
+    --gold-accent: #f0a500;  /* Dorado para textos */
+
+    /* Variables para el slider de Testimonios */
     --card-width: 350px;
     --card-gap: 30px;
-    /* Cálculo del ancho total de un set de tarjetas (6 tarjetas) */
-    /* (350 * 6) + (30 * 6) = 2100 + 180 = 2280px */
+
+    /* VARIABLES PARA CARRUSEL PROYECTOS ROJO */
+    --port-card-width: 400px;
+    --port-card-gap: 30px;
+    --brand-red: #e60023; /* Rojo intenso exclusivo para proyectos */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
@@ -19,9 +25,9 @@ body { background-color: var(--bg-color); color: var(--text-color); overflow-x: 
 /* --- ANIMACIONES --- */
 @keyframes light-shimmer { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
 @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0.4); }
-    70% { box-shadow: 0 0 0 20px rgba(102, 252, 241, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(212, 36, 38, 0.4); }
+    70% { box-shadow: 0 0 0 20px rgba(212, 36, 38, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 36, 38, 0); }
 }
 @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
@@ -39,12 +45,17 @@ body { background-color: var(--bg-color); color: var(--text-color); overflow-x: 
     background: #151515; border-radius: 50%;
     margin: 0 auto 25px; border: 3px solid var(--accent-color);
     display: flex; align-items: center; justify-content: center; overflow: hidden;
-    box-shadow: 0 0 20px rgba(102, 252, 241, 0.3); animation: pulse-glow 2s infinite;
+    box-shadow: 0 0 20px rgba(212, 36, 38, 0.3); animation: pulse-glow 2s infinite;
 }
 .welcome-text { font-size: 2rem; margin-bottom: 5px; color: #fff; }
-.status-text { color: var(--dark-accent); margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1rem; height: 20px; }
+.status-text { color: var(--gold-accent); margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1rem; height: 20px; }
 .loading-bar-container { width: 100%; height: 8px; background: #222; margin-top: 25px; border-radius: 10px; overflow: hidden; }
-.loading-bar { width: 0%; height: 100%; background: var(--accent-color); border-radius: 10px; box-shadow: 0 0 10px var(--accent-color); }
+/* Barra de carga estilo caramelo navideño */
+.loading-bar { 
+    width: 0%; height: 100%; 
+    background: repeating-linear-gradient(45deg, var(--accent-color), var(--accent-color) 10px, #fff 10px, #fff 20px);
+    border-radius: 10px; box-shadow: 0 0 10px var(--accent-color); 
+}
 .percentage { color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-top: 10px; display: block; text-align: right; }
 
 /* --- MODAL DE ÉXITO --- */
@@ -54,35 +65,35 @@ body { background-color: var(--bg-color); color: var(--text-color); overflow-x: 
 }
 .modal-content {
     background: var(--secondary-bg); padding: 50px; border-radius: 20px; text-align: center;
-    border: 2px solid var(--accent-color); box-shadow: 0 0 40px rgba(102, 252, 241, 0.3);
+    border: 2px solid var(--accent-color); box-shadow: 0 0 40px rgba(212, 36, 38, 0.3);
     max-width: 450px; width: 90%; animation: popIn 0.3s ease-out;
 }
 .modal-icon { font-size: 5rem; color: var(--accent-color); margin-bottom: 25px; }
-.modal-title { font-size: 2.2rem; margin-bottom: 15px; color: #fff; }
+.modal-title { font-size: 2.2rem; margin-bottom: 15px; color: var(--gold-accent); }
 .modal-text { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
 .close-btn {
-    background: var(--accent-color); color: #0b0c10; border: none; padding: 12px 35px;
+    background: var(--accent-color); color: #fff; border: none; padding: 12px 35px;
     font-weight: bold; font-size: 1.1rem; border-radius: 5px; cursor: pointer; transition: .3s;
 }
-.close-btn:hover { background: #fff; box-shadow: 0 0 20px var(--accent-color); }
+.close-btn:hover { background: #fff; color: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); }
 
 /* --- BOTÓN SUBIR --- */
 #scrollTopBtn {
     display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99;
     font-size: 1.8rem; border: none; outline: none; background-color: var(--accent-color);
-    color: #0b0c10; cursor: pointer; padding: 12px 18px; border-radius: 12px;
-    box-shadow: 0 0 20px rgba(102, 252, 241, 0.4); transition: 0.3s;
+    color: #fff; cursor: pointer; padding: 12px 18px; border-radius: 12px;
+    box-shadow: 0 0 20px rgba(212, 36, 38, 0.4); transition: 0.3s;
 }
-#scrollTopBtn:hover { background-color: #fff; transform: translateY(-5px); }
+#scrollTopBtn:hover { background-color: #fff; color: var(--accent-color); transform: translateY(-5px); }
 
 /* --- HEADER & NAV --- */
 header {
     position: fixed; top: 0; left: 0; width: 100%; padding: 25px 8%; 
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(11, 12, 16, 0.95); backdrop-filter: blur(10px);
-    z-index: 100; border-bottom: 1px solid rgba(102, 252, 241, 0.1); transition: padding 0.3s;
+    z-index: 100; border-bottom: 1px solid rgba(212, 36, 38, 0.3); transition: padding 0.3s;
 }
-/* LOGO CON EFECTO BRILLO */
+/* LOGO */
 .logo { 
     font-size: 1.8rem; font-weight: 800; color: transparent; 
     text-transform: uppercase; letter-spacing: 2px; text-decoration: none;
@@ -91,48 +102,64 @@ header {
     animation: light-shimmer 2.5s linear infinite;
 }
 .navbar a { font-size: 1.1rem; color: #fff; text-decoration: none; font-weight: 500; margin-left: 40px; transition: .3s; }
-.navbar a:hover, .navbar a.active { color: var(--accent-color); }
+.navbar a:hover, .navbar a.active { color: var(--gold-accent); text-shadow: 0 0 5px var(--gold-accent); }
 #menu-icon { font-size: 3rem; color: #fff; display: none; cursor: pointer; }
 
 /* --- SECCIONES COMUNES --- */
 section { padding: 120px 8%; min-height: 100vh; }
-.heading { font-size: 3.5rem; text-align: center; margin-bottom: 60px; }
+.heading { font-size: 3.5rem; text-align: center; margin-bottom: 60px; color: var(--gold-accent); }
 
-/* Efecto Brillo Texto en Títulos */
+/* Titulos animados (Dorado Navideño) */
 .text-animate h3, .heading span {
     font-size: 2.5rem; font-weight: 800; text-transform: uppercase; color: transparent;
-    background: linear-gradient(90deg, var(--accent-color) 0%, #ffffff 50%, var(--accent-color) 100%);
+    background: linear-gradient(90deg, var(--gold-accent) 0%, #ffffff 50%, var(--gold-accent) 100%);
     background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
     animation: light-shimmer 2.5s linear infinite;
 }
 .heading span { font-size: inherit; font-weight: inherit; }
 
-/* --- HOME CON IMAGEN DE FONDO --- */
+/* --- HOME --- */
 #home {
     display: flex; align-items: center;
-    background: linear-gradient(rgba(11, 12, 16, 0.8), rgba(11, 12, 16, 0.9)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background: linear-gradient(rgba(5, 10, 8, 0.85), rgba(5, 10, 8, 0.95)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
     background-size: cover; background-position: center; background-attachment: fixed;
 }
-.home-content h3 { font-size: 1.8rem; font-weight: 400; }
-.home-content h1 { font-size: 5rem; font-weight: 700; line-height: 1.1; color: #fff; margin-bottom: 10px; }
+.home-content h3 { font-size: 1.8rem; font-weight: 400; color: #fff; }
+.home-content h1 { font-size: 5rem; font-weight: 700; line-height: 1.1; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 0 10px rgba(212,36,38,0.5); }
 .home-content p { margin: 25px 0 45px; max-width: 650px; font-size: 1.1rem; line-height: 1.8; }
 
 .btn-box {
     display: inline-block; padding: 14px 34px; background: var(--accent-color);
-    border-radius: 8px; font-weight: 600; color: var(--bg-color); text-decoration: none;
-    box-shadow: 0 0 20px rgba(102, 252, 241, 0.4); transition: .3s; border: none; cursor: pointer; font-size: 1.1rem;
+    border-radius: 8px; font-weight: 600; color: #fff; text-decoration: none;
+    box-shadow: 0 0 20px rgba(212, 36, 38, 0.4); transition: .3s; border: none; cursor: pointer; font-size: 1.1rem;
 }
-.btn-box:hover { box-shadow: 0 0 30px var(--accent-color); background: #fff; transform: scale(1.05); }
+.btn-box:hover { box-shadow: 0 0 30px var(--accent-color); background: #fff; color: var(--accent-color); transform: scale(1.05); }
 
-/* --- ABOUT --- */
+/* --- ABOUT (GORRO DE SANTA) --- */
 #about { background-color: var(--secondary-bg); display: flex; align-items: center; gap: 60px; }
-.about-img { flex: 1; text-align: center; }
-.profile-pic { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-color); box-shadow: 0 0 40px rgba(102, 252, 241, 0.5); }
+.about-img { 
+    flex: 1; text-align: center; position: relative; 
+}
+/* GORRO DE SANTA SOBRE LA FOTO */
+.about-img::before {
+    content: "🎅";
+    font-size: 100px;
+    position: absolute;
+    top: -55px;
+    left: 50%; /* Centrado respecto al contenedor */
+    transform: translateX(20px) rotate(15deg); /* Ajuste fino */
+    z-index: 10;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%, 100% { transform: translateX(20px) rotate(15deg) translateY(0); } 50% { transform: translateX(20px) rotate(15deg) translateY(-10px); } }
+
+.profile-pic { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-color); box-shadow: 0 0 40px rgba(212, 36, 38, 0.5); }
 .about-content { flex: 1.5; }
-.about-content h3 { font-size: 2rem; margin-bottom: 15px; }
+.about-content h3 { font-size: 2rem; margin-bottom: 15px; color: var(--gold-accent); }
 .about-content p { font-size: 1.1rem; line-height: 1.8; }
 
-/* --- ARQUITECTURA (GRANDE) --- */
+/* --- ARQUITECTURA --- */
 #stack-details { background-color: #0f1115; text-align: center; }
 .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-top: 60px; }
 .stack-card {
@@ -141,64 +168,137 @@ section { padding: 120px 8%; min-height: 100vh; }
 }
 .stack-card:hover { border-bottom: 5px solid var(--accent-color); transform: translateY(-12px); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
 .stack-icon { font-size: 4.5rem; color: var(--accent-color); margin-bottom: 30px; display: inline-block; }
-.stack-card h3 { font-size: 2rem; color: #fff; margin-bottom: 20px; }
+.stack-card h3 { font-size: 2rem; color: var(--gold-accent); margin-bottom: 20px; }
 .stack-card p { font-size: 1.15rem; color: #a0a0a0; line-height: 1.8; margin-bottom: 25px; }
 .stack-tags { display: flex; flex-wrap: wrap; gap: 12px; }
 .tech-tag {
-    background: rgba(102, 252, 241, 0.1); color: var(--accent-color); padding: 8px 15px;
+    background: rgba(22, 91, 51, 0.2); /* Fondo verde pino suave */
+    color: #4caf50; padding: 8px 15px;
     border-radius: 25px; font-size: 0.95rem; font-weight: 600; font-family: 'JetBrains Mono', monospace;
 }
 
-/* --- SERVICES (GRANDE) --- */
+/* --- SERVICES --- */
 .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 .service-box { background: var(--secondary-bg); padding: 50px 30px; border-radius: 15px; text-align: center; border: 1px solid transparent; transition: .4s; }
 .service-box:hover { border-color: var(--accent-color); transform: scale(1.03); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .service-box i { font-size: 4rem; color: var(--accent-color); margin-bottom: 20px; }
-.service-box h3 { font-size: 1.8rem; margin-bottom: 15px; }
+.service-box h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--gold-accent); }
 .service-box p { font-size: 1.1rem; line-height: 1.6; }
 
-/* --- PROJECTS --- */
-.portfolio-container { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-    gap: 30px; 
+/* --- PROJECTS (CARRUSEL INFINITO ROJO) --- */
+.portfolio-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+    /* Máscara para suavizar bordes laterales */
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
-.portfolio-box { 
-    position: relative; 
-    border-radius: 15px; 
-    overflow: hidden; 
-    display: flex; 
-    height: 300px; 
-    background: #2c2c2c; 
-    align-items: center; 
-    justify-content: center; 
-    border: 1px solid #333; 
+.portfolio-track {
+    display: flex;
+    gap: var(--port-card-gap);
+    /* Ajusta el * 8 según la cantidad total de tarjetas (originales + duplicadas) */
+    width: calc((var(--port-card-width) + var(--port-card-gap)) * 8); 
+    animation: scroll-portfolio 50s linear infinite;
+}
+
+.portfolio-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-portfolio {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc((var(--port-card-width) + var(--port-card-gap)) * -4)); }
+}
+
+/* Tarjeta de Proyecto */
+.portfolio-card {
+    position: relative;
+    width: var(--port-card-width);
+    height: 250px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #333;
     cursor: pointer;
-    text-decoration: none; 
-    color: inherit; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-decoration: none; /* Asegura que no tenga subrayado */
 }
 
-.portfolio-box img {
-    width: 100%; height: 100%; object-fit: cover; 
-    transition: transform 0.5s ease; opacity: 0.7; 
+.portfolio-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    opacity: 0.9;
 }
 
-.portfolio-box:hover img { transform: scale(1.1); opacity: 0.3; }
-
-.portfolio-layer {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
-    background: linear-gradient(rgba(0,0,0,0.1), var(--accent-color));
-    display: flex; justify-content: center; align-items: center; flex-direction: column;
-    text-align: center; padding: 0 3rem; 
-    transform: translateY(100%); transition: .5s;
+/* Efecto Hover */
+.portfolio-card:hover img {
+    transform: scale(1.1);
+    opacity: 0.4;
 }
 
-.portfolio-box:hover .portfolio-layer, 
-.portfolio-box.active .portfolio-layer { transform: translateY(0); }
+/* Capa Roja con Texto */
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* GRADIENTE ROJO INTENSO (Estilo WVL) */
+    background: linear-gradient(to top, rgba(200, 0, 30, 0.95) 0%, rgba(200, 0, 30, 0.6) 60%, transparent 100%);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    transform: translateY(100%);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px;
+}
 
-.portfolio-layer h4 { font-size: 1.8rem; color: #000; font-weight: bold; }
-.portfolio-layer p { color: #111; margin-top: 15px; font-weight: 600; font-size: 1.1rem; }
+.portfolio-card:hover .portfolio-overlay {
+    transform: translateY(0);
+}
+
+.portfolio-overlay h4 {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.portfolio-overlay p {
+    font-size: 1rem;
+    color: #ffd1d1; /* Subtítulo rosado pálido */
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Icono de enlace */
+.portfolio-overlay i {
+    font-size: 1.8rem;
+    color: var(--brand-red); /* Icono Rojo */
+    background: #fff;        /* Fondo Blanco */
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.portfolio-overlay i:hover {
+    transform: scale(1.1) rotate(45deg);
+    background: #000;
+    color: #fff;
+}
 
 /* --- CONTACTO --- */
 #contact { display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -208,9 +308,9 @@ section { padding: 120px 8%; min-height: 100vh; }
     background: var(--secondary-bg); padding: 30px; border-radius: 15px; text-align: center; min-width: 180px; border: 1px solid #333;
     text-decoration: none; color: #fff; transition: .3s;
 }
-.contact-card:hover { border-color: var(--accent-color); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(102, 252, 241, 0.2); }
+.contact-card:hover { border-color: var(--accent-color); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(212, 36, 38, 0.2); }
 .contact-card i { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
-.contact-card h4 { margin-bottom: 8px; font-size: 1.2rem; }
+.contact-card h4 { margin-bottom: 8px; font-size: 1.2rem; color: var(--gold-accent); }
 .contact-card p { font-size: 0.95rem; color: #aaa; }
 
 .contact-form { max-width: 700px; margin: 0 auto; background: var(--secondary-bg); padding: 40px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; gap: 20px; }
@@ -219,100 +319,36 @@ section { padding: 120px 8%; min-height: 100vh; }
 .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); }
 .contact-form textarea { resize: none; height: 180px; }
 
-
-/* --- TESTIMONIOS (NUEVO INFINITE SLIDER) --- */
-#testimonials {
-    background-color: #0f1115;
-    padding: 100px 0; /* Padding vertical, 0 horizontal para que el slider ocupe ancho */
-    overflow: hidden; /* Vital para que no aparezca barra de scroll horizontal en la página */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
+/* --- TESTIMONIOS (CARRUSEL ORIGINAL) --- */
+#testimonials { background-color: #0f1115; padding: 100px 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
 .slider-container {
-    width: 100%;
-    margin-top: 40px;
-    position: relative;
-    /* Sombras laterales para difuminar entrada y salida */
+    width: 100%; margin-top: 40px; position: relative;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
-
 .slider-track {
-    display: flex;
-    gap: var(--card-gap);
-    /* Ancho calculado dinámicamente: (350px + 30px) * 12 tarjetas = 4560px */
+    display: flex; gap: var(--card-gap);
     width: calc((var(--card-width) + var(--card-gap)) * 12);
     animation: scroll 40s linear infinite;
 }
-
-/* Pausar animación al poner el mouse encima */
-.slider-track:hover {
-    animation-play-state: paused;
-}
-
+.slider-track:hover { animation-play-state: paused; }
 @keyframes scroll {
     0% { transform: translateX(0); }
-    /* Mueve la mitad exacta del ancho total (6 tarjetas) para reiniciar el loop invisiblemente */
     100% { transform: translateX(calc((var(--card-width) + var(--card-gap)) * -6)); }
 }
-
 .testimonial-card {
-    background: #161b22;
-    width: var(--card-width);
-    flex-shrink: 0; /* Evita que se encojan */
-    padding: 40px 30px;
-    border-radius: 15px;
-    border: 1px solid #333;
-    position: relative;
-    text-align: left;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background: #161b22; width: var(--card-width); flex-shrink: 0;
+    padding: 40px 30px; border-radius: 15px; border: 1px solid #333;
+    position: relative; text-align: left; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
 }
-
-.testimonial-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.quote-icon {
-    font-size: 3rem;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    opacity: 0.5;
-}
-
-.testimonial-card p {
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 1.6;
-    font-style: italic;
-    margin-bottom: 25px;
-}
-
-.client-info h4 {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.client-info span {
-    color: var(--dark-accent);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
+.testimonial-card:hover { transform: translateY(-5px); border-color: var(--accent-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.quote-icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 20px; opacity: 0.5; }
+.testimonial-card p { font-size: 1rem; color: #ccc; line-height: 1.6; font-style: italic; margin-bottom: 25px; }
+.client-info h4 { color: #fff; font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; }
+.client-info span { color: var(--dark-accent); font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 1024px) {
-    header { padding: 20px 5%; } section { padding: 100px 5%; } .home-content h1 { font-size: 4rem; } 
-}
+@media (max-width: 1024px) { header { padding: 20px 5%; } section { padding: 100px 5%; } .home-content h1 { font-size: 4rem; } }
 @media (max-width: 768px) {
     header { padding: 15px 24px; } section { padding: 80px 24px; } 
     #menu-icon { display: block; }
@@ -324,13 +360,18 @@ section { padding: 120px 8%; min-height: 100vh; }
     #home, #about, #stack-details { flex-direction: column; padding-top: 140px; text-align: center; } 
     .home-content h1 { font-size: 3rem; margin-bottom: 15px; } .home-content h3 { font-size: 1.5rem; } .text-animate h3 { font-size: 1.8rem; }
     .about-img { margin-bottom: 40px; width: 100%; } .profile-pic { width: 220px; height: 220px; margin: 0 auto; }
+    /* Ajuste gorro movil */
+    .about-img::before { left: 50%; top: -30px; transform: translateX(20px) rotate(15deg) scale(0.8); }
+
     .contact-container { flex-direction: column; width: 100%; } .contact-card { width: 100%; margin-bottom: 10px; }
     .stack-card { text-align: center; padding: 40px 20px; } .stack-tags { justify-content: center; }
     .heading { font-size: 2.5rem; margin-bottom: 40px; }
     
-    /* Ajuste para testimonios en móvil */
-    :root {
-        --card-width: 300px; /* Tarjetas un poco más angostas en móvil */
-    }
+    /* Ajuste Slider Testimonios Móvil */
+    :root { --card-width: 300px; }
     #testimonials { padding: 60px 0; }
+
+    /* Ajuste Slider Proyectos Móvil */
+    :root { --port-card-width: 300px; }
+    .portfolio-card { height: 200px; }
 }

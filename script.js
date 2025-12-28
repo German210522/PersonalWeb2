@@ -1,4 +1,4 @@
-// --- 1. PANTALLA DE CARGA (MÁS RÁPIDA) ---
+/* --- 1. PANTALLA DE CARGA (MÁS RÁPIDA) --- */
 window.addEventListener('load', () => {
     const bar = document.getElementById('progress-bar');
     const percentText = document.getElementById('percentage-num');
@@ -7,20 +7,19 @@ window.addEventListener('load', () => {
 
     let width = 0;
     
-    // CAMBIO AQUÍ: Bajamos el tiempo de intervalo de 30 a 20ms
+    // Intervalo de carga
     const timer = setInterval(() => {
-        // CAMBIO AQUÍ: Aumentamos el incremento de 2 a 4 por paso
         width += 4; 
         
         // Actualizar barra y texto visualmente
         if (bar) bar.style.width = width + '%';
         if (percentText) percentText.innerText = Math.floor(width) + '%';
 
-        // Mensajes de estado (Aparecen más rápido)
+        // Mensajes de estado
         if (statusMsg) {
-            if (width < 30) statusMsg.innerText = "Iniciando...";
-            else if (width < 60) statusMsg.innerText = "Cargando...";
-            else statusMsg.innerText = "¡Listo!";
+            if (width < 30) statusMsg.innerText = "Conectando con el Polo Norte...";
+            else if (width < 60) statusMsg.innerText = "Cargando regalos...";
+            else statusMsg.innerText = "¡Feliz Navidad!";
         }
 
         // Finalizar carga
@@ -28,22 +27,62 @@ window.addEventListener('load', () => {
             width = 100;
             clearInterval(timer);
             
-            // Paso 1: Deslizar hacia arriba
+            // Deslizar hacia arriba
             if (overlay) {
                 setTimeout(() => { 
                     overlay.style.transform = 'translateY(-100%)'; 
-                }, 200); // Antes 500, ahora 200ms para subir más rápido
+                }, 200); 
 
-                // Paso 2: Eliminar por completo
                 setTimeout(() => { 
                     overlay.style.display = 'none'; 
                 }, 1000); 
             }
         }
-    }, 20); // Intervalo más corto = animación más fluida y rápida
+    }, 20); 
 });
 
-// --- 2. MENÚ HAMBURGUESA ---
+/* --- 2. EFECTO DE NIEVE (SIN BLOQUEAR CLICS) --- */
+document.addEventListener("DOMContentLoaded", function() {
+    const snowContainer = document.createElement('div');
+    snowContainer.style.position = 'fixed';
+    snowContainer.style.top = '0';
+    snowContainer.style.left = '0';
+    snowContainer.style.width = '100%';
+    snowContainer.style.height = '100%';
+    snowContainer.style.pointerEvents = 'none'; // CRUCIAL: Permite hacer clic a través de la nieve
+    snowContainer.style.zIndex = '9999'; 
+    document.body.appendChild(snowContainer);
+
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.innerHTML = '❄';
+        snowflake.style.position = 'absolute';
+        snowflake.style.color = 'white';
+        snowflake.style.fontSize = Math.random() * 20 + 10 + 'px'; 
+        snowflake.style.left = Math.random() * 100 + 'vw'; 
+        snowflake.style.opacity = Math.random();
+        snowflake.style.top = '-50px';
+        
+        const duration = Math.random() * 3 + 2; 
+        snowflake.style.transition = `top ${duration}s linear, opacity ${duration}s ease-out`;
+        
+        snowContainer.appendChild(snowflake);
+
+        setTimeout(() => {
+            snowflake.style.top = '110vh'; 
+            snowflake.style.opacity = '0'; 
+        }, 50);
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, duration * 1000);
+    }
+    
+    // Generar nieve constante
+    setInterval(createSnowflake, 200);
+});
+
+/* --- 3. MENÚ HAMBURGUESA --- */
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
@@ -54,13 +93,13 @@ if (menuIcon && navbar) {
     });
 }
 
-// --- 3. AÑO AUTOMÁTICO ---
+/* --- 4. AÑO AUTOMÁTICO --- */
 const yearSpan = document.getElementById("year");
 if (yearSpan) {
     yearSpan.innerHTML = new Date().getFullYear();
 }
 
-// --- 4. BOTÓN SUBIR (SCROLL UP) ---
+/* --- 5. BOTÓN SUBIR (SCROLL UP) --- */
 let mybutton = document.getElementById("scrollTopBtn");
 window.onscroll = function() { scrollFunction() };
 
@@ -79,7 +118,7 @@ function topFunction() {
     document.documentElement.scrollTop = 0; 
 }
 
-// --- 5. FORMULARIO AJAX (CONTACTO) ---
+/* --- 6. FORMULARIO AJAX (CONTACTO) --- */
 var form = document.getElementById("contact-form");
 var statusTxt = document.getElementById("form-status");
 
@@ -88,7 +127,7 @@ if (form) {
         event.preventDefault();
         if(statusTxt) {
             statusTxt.style.display = 'block'; 
-            statusTxt.innerHTML = "Procesando envío...";
+            statusTxt.innerHTML = "Enviando carta a Santa...";
         }
 
         var data = new FormData(event.target);
@@ -123,3 +162,25 @@ function closeModal() {
     const successModal = document.getElementById('success-modal');
     if(successModal) successModal.style.display = 'none'; 
 }
+/* --- CÓDIGO DE SEGURIDAD PARA MÓVILES --- */
+
+// Opción 1: Tu código de carga normal (el que ya tienes)
+window.addEventListener('load', function() {
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Reactivar scroll
+    }
+});
+
+// Opción 2: El "Seguro de Vida" (Timeout)
+// Si por alguna razón la página tarda más de 3 segundos en cargar,
+// quitamos la pantalla de carga a la fuerza.
+setTimeout(function() {
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay && overlay.style.display !== 'none') {
+        console.log("Carga forzada por tiempo de espera.");
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Asegurar que se pueda bajar
+    }
+}, 3000); // 3000 milisegundos = 3 segundos

@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
 
     <link rel="icon" href="Imagenes/safecamg.png">
-    <title>Jz SYSTEMS</title>
+    <title>Jz.Dev</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -25,11 +25,17 @@
     <div id="intro-overlay">
         <div class="login-box">
             <div class="user-avatar">
-                <img src="Imagenes/logo1.png" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                <img src="Imagenes/logo1.png" alt="Logo" style="width: 80%; height: 80%; object-fit: contain;">
             </div> 
+            
             <h2 class="welcome-text">Bienvenido.</h2>
+            
             <p class="status-text" id="status-msg">Inicializando...</p>
-            <div class="loading-bar-container"><div class="loading-bar" id="progress-bar"></div></div>
+            
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="progress-bar"></div>
+            </div>
+            
             <span class="percentage" id="percentage-num">0%</span>
         </div>
     </div>
@@ -46,7 +52,7 @@
     <button onclick="topFunction()" id="scrollTopBtn" title="Ir arriba"><i class='bx bx-up-arrow-alt'></i></button>
 
     <header>
-        <a href="#home" class="logo">Jz SYSTEMS</a>
+        <a href="#home" class="logo">Jz.Dev</a>
         <div id="menu-icon"><i class='bx bx-menu'></i></div>
         <nav class="navbar">
             <a href="#home">Inicio</a>
@@ -67,7 +73,7 @@
             </div>
             <p>Un especializado en crear soluciones tecnológicas de alto impacto. Diseño arquitecturas robustas y experiencias de usuario fluidas.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="#contact" class="btn-box">Contratar</a>
+                <a href="#contact" class="btn-box">Contactar</a>
                 <a href="https://github.com/German210522" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class='bx bxl-github'></i></a>
                 <a href="https://www.linkedin.com/in/german-juárez-23b990311?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class='bx bxl-linkedin'></i></a>
             </div>
@@ -81,13 +87,13 @@
         <div class="about-content">
             <h2 class="heading">Acerca de <span>Mí</span></h2>
             <h3>¡Ingeniero comprometido!</h3>
-            <p>Soy fundador de <strong>Jz SYSTEMS</strong>. Un apasionado por la innovación que transforma problemas complejos en soluciones tecnológicas sencillas.</p>
+            <p>Soy fundador de <strong>Jz.Dev</strong>. Un apasionado por la innovación que transforma problemas complejos en soluciones tecnológicas sencillas.</p>
             <a href="https://drive.google.com/file/d/1ArnZzXLvQqk4hUNw4W_ajC21fmgmWCVJ/view?usp=drive_link" class="btn-box">Descargar CV</a>
         </div>
     </section>
 
     <section id="stack-details">
-        <h2 class="heading">Arquitectura <span>Jz SYSTEMS</span></h2>
+        <h2 class="heading">Arquitectura <span>Jz.Dev</span></h2>
         <p style="max-width: 800px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #ccc; text-align: center;">
             Diseño soluciones completas combinando la robustez de la ingeniería con la experiencia visual del cliente.
         </p>
@@ -131,37 +137,87 @@
 
    <section id="portfolio">
         <h2 class="heading">Mi portafolio de <span>Proyectos</span></h2>
-        <p style="text-align:center; margin-bottom:20px; color:gray; font-size: 1rem;">(Clic en la tarjeta para visitar el sitio)</p>
+        <p style="text-align:center; margin-bottom:40px; color:gray; font-size: 1rem;">
+            (Desplazamiento automático - Clic para visitar)
+        </p>
         
-        <div class="portfolio-container">
-            
-            <a href="https://german210522.github.io/wvl-website/" target="_blank" class="portfolio-box">
-                <img src="Imagenes/WVL.png" alt="Proyecto Alpha">
-                <div class="portfolio-layer">
-                    <h4>Sitio Web WVL</h4>
-                    <p>Desarrollo web estático para negocio internacional.</p>
-                    <span style="margin-top:10px; font-size:1.5rem;"><i class='bx bx-link-external'></i></span>
-                </div>
-            </a>
+        <div class="portfolio-slider">
+            <div class="portfolio-track">
+                
+                <a href="https://german210522.github.io/wvl-website/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/WVL.png" alt="Sitio Web WVL">
+                    <div class="portfolio-overlay">
+                        <h4>Sitio Web WVL</h4>
+                        <p>Desarrollo Estático</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
 
-            <a href="https://german210522.github.io/restaurante-app-tokio/" target="_blank" class="portfolio-box">
-                <img src="Imagenes/tokior.png" alt="Proyecto Gamma">
-                <div class="portfolio-layer">
-                    <h4>Sistema de Reservas</h4>
-                    <p>Reservas con visualización en tiempo real.</p>
-                    <span style="margin-top:10px; font-size:1.5rem;"><i class='bx bx-link-external'></i></span>
-                </div>
-            </a>
+                <a href="https://german210522.github.io/restaurante-app-tokio/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/tokior.png" alt="Sistema Reservas">
+                    <div class="portfolio-overlay">
+                        <h4>Sistema Reservas</h4>
+                        <p>App Web Dinámica</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
 
-            <a href="https://german210522.github.io/Directorio-de-Empleados/" target="_blank" class="portfolio-box">
-                <img src="Imagenes/directorio.png" alt="Proyecto Beta">
-                <div class="portfolio-layer">
-                    <h4>Directorio de Empleados</h4>
-                    <p>Manejo de empleados e historial.</p>
-                    <span style="margin-top:10px; font-size:1.5rem;"><i class='bx bx-link-external'></i></span>
-                </div>
-            </a>
+                 <a href="https://demo-colegio-react.vercel.app/" target="_blank" class="portfolio-card">
+                     <img src="Imagenes/web_educativa.png" alt="Nuevo Proyecto">
+                    <div class="portfolio-overlay">
+                        <h4>Establecimiento Educativo</h4>
+                        <p>Plataforma Web</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
 
+
+                <a href="https://german210522.github.io/demo-cooperativa/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/cooperativa_demo.png" alt="Nuevo Proyecto">
+                    <div class="portfolio-overlay">
+                        <h4>Cooperativa Web</h4>
+                        <p>Desarrollo de Mejora</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
+
+                <a href="https://german210522.github.io/transporte-demo/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/transporte.png" alt="Nuevo Proyecto">
+                    <div class="portfolio-overlay">
+                        <h4>Plataforma de reservas</h4>
+                        <p>App Web Dinámica</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
+
+                <a href="https://german210522.github.io/Directorio-de-Empleados/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/directorio.png" alt="Directorio RRHH">
+                    <div class="portfolio-overlay">
+                        <h4>Directorio RRHH</h4>
+                        <p>Gestión de Datos</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
+                
+                <a href="https://german210522.github.io/wvl-website/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/WVL.png" alt="Sitio Web WVL">
+                    <div class="portfolio-overlay">
+                        <h4>Sitio Web WVL</h4>
+                        <p>Desarrollo Estático</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
+
+                <a href="https://german210522.github.io/restaurante-app-tokio/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/tokior.png" alt="Sistema Reservas">
+                    <div class="portfolio-overlay">
+                        <h4>Sistema Reservas</h4>
+                        <p>App Web Dinámica</p>
+                        <i class='bx bx-link-external'></i>
+                    </div>
+                </a>
+
+            </div>
         </div>
     </section>
 
@@ -285,7 +341,7 @@
     </section>
 
     <section id="contact">
-        <h2 class="heading">Contactar a <span>Jz SYSTEMS</span></h2>
+        <h2 class="heading">Contactar a <span>Jz.Dev</span></h2>
         <div class="contact-content">
             <p style="font-size: 1.1rem; text-align: center;">¿Tienes un proyecto en mente? ¡Hablemos! Estoy disponible para consultorías y desarrollos a medida.</p>
             <div class="contact-container">
@@ -299,13 +355,13 @@
                 <input type="email" name="email" placeholder="Correo Electrónico Corporativo" required>
                 <textarea name="message" placeholder="Describa su proyecto o requerimiento..." required></textarea>
                 <button type="submit" class="btn-box" style="width: 100%;">Solicitar Cotización</button>
-                <p id="form-status" style="margin-top: 10px; color: var(--accent-color); display: none;">Enviando...</p>
+                <p id="form-status" style="margin-top: 10px; color: var(--accent-cyan); display: none;">Enviando...</p>
             </form>
         </div>
     </section>
 
     <footer style="text-align: center; padding: 20px; background: #000; color: #555;">
-        <p>Copyright © <span id="year"></span> Jz SYSTEMS - Ingeniería y Tecnología. Todos los derechos reservados.</p>
+        <p>Copyright © <span id="year"></span> Jz.Dev - Ingeniería y Tecnología. Todos los derechos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
