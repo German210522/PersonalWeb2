@@ -1,22 +1,20 @@
-/* --- VARIABLES Y RESET (MODO NAVIDAD DELUXE - NIEVE FRONTAL) --- */
+/* --- VARIABLES Y RESET (EDICIÓN NAVIDAD FINAL - LIMPIA) --- */
 :root {
-    --bg-color: #050a08; /* Negro verdoso oscuro (Noche de Navidad) */
+    --bg-color: #050a08; /* Noche de Navidad (Negro verdoso) */
     --secondary-bg: #141a17;
     --text-color: #e0e0e0;
     
     /* PALETA NAVIDEÑA */
-    --accent-color: #d42426; /* Rojo Santa Claus */
+    --accent-color: #d42426; /* Rojo Santa */
     --dark-accent: #165b33;  /* Verde Pino */
     --gold-accent: #f0a500;  /* Dorado Estrella */
     
     /* Color de la nieve */
     --snow-color: rgba(255, 255, 255, 0.9);
 
-    /* Variables Slider Testimonios */
+    /* Variables Sliders */
     --card-width: 350px;
     --card-gap: 30px;
-
-    /* Variables Slider Proyectos (Rojo) */
     --port-card-width: 400px;
     --port-card-gap: 30px;
     --brand-red: #e60023; 
@@ -30,21 +28,18 @@ body {
     color: var(--text-color); 
     overflow-x: hidden; 
     font-size: 16px; 
-    position: relative; /* Necesario para que la nieve se posicione bien */
+    position: relative; 
 }
 
 /* --- CAPA DE NIEVE (POR ENCIMA DE TODO) ❄️ --- */
 body::after {
     content: "";
-    position: fixed; /* Se mantiene fijo aunque hagas scroll */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* TRUCO DE MAGIA: Permite hacer clics a través de la nieve */
-    z-index: 9999; /* Encima de todo el sitio */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* Permite hacer clic a través de la nieve */
+    z-index: 9999; /* Encima de todo */
     
-    /* Patrón de nieve */
+    /* Copos de nieve */
     background-image: 
         radial-gradient(var(--snow-color) 2px, transparent 3px),
         radial-gradient(var(--snow-color) 1.5px, transparent 2.5px),
@@ -52,9 +47,8 @@ body::after {
     
     background-size: 500px 500px, 400px 400px, 300px 300px;
     background-position: 0 0, 0 0, 0 0;
-    
     animation: snowfall 10s linear infinite;
-    opacity: 0.8; /* Un poco transparente para no tapar textos */
+    opacity: 0.8;
 }
 
 @keyframes snowfall {
@@ -76,31 +70,34 @@ body::after {
 /* --- PANTALLA DE CARGA --- */
 #intro-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    background-color: #050505; z-index: 10000; /* Loader encima de la nieve */
+    background-color: #050505; z-index: 10000;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    padding: 20px;
 }
-.login-box { text-align: center; width: 100%; max-width: 400px; padding: 20px; }
+.login-box { text-align: center; width: 90%; max-width: 400px; }
 
 .user-avatar {
-    width: 120px; height: 120px; 
+    width: 150px; height: 150px; /* Tamaño grande para móvil */
     background: #151515; border-radius: 50%;
     margin: 0 auto 25px; border: 4px solid #fff; 
     display: flex; align-items: center; justify-content: center; overflow: hidden;
-    box-shadow: 0 0 20px rgba(212, 36, 38, 0.5); 
+    box-shadow: 0 0 30px rgba(212, 36, 38, 0.6); 
     animation: pulse-glow 2s infinite;
 }
-.welcome-text { font-size: 2rem; margin-bottom: 5px; color: #fff; }
-.status-text { color: var(--gold-accent); margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
-.loading-bar-container { width: 100%; height: 10px; background: #222; margin-top: 25px; border-radius: 10px; overflow: hidden; }
+.user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.welcome-text { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
+.status-text { color: var(--gold-accent); margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
+.loading-bar-container { width: 100%; height: 15px; background: #222; margin-top: 30px; border-radius: 10px; overflow: hidden; }
 
 /* Barra rayada tipo dulce */
 .loading-bar { 
     width: 0%; height: 100%; 
-    background: repeating-linear-gradient(45deg, var(--accent-color), var(--accent-color) 10px, #fff 10px, #fff 20px);
-    border-radius: 10px; box-shadow: 0 0 10px var(--accent-color); 
+    background: repeating-linear-gradient(45deg, var(--accent-color), var(--accent-color) 15px, #fff 15px, #fff 30px);
+    border-radius: 10px; box-shadow: 0 0 15px var(--accent-color); 
 }
-.percentage { color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-top: 10px; display: block; text-align: right; }
+.percentage { color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 1rem; margin-top: 10px; display: block; text-align: right; }
 
 /* --- MODAL DE ÉXITO --- */
 #success-modal {
@@ -121,13 +118,14 @@ body::after {
 }
 .close-btn:hover { background: #fff; color: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); }
 
-/* --- HEADER (DECORACIÓN CARAMELO) --- */
+/* --- HEADER (DECORACIÓN CARAMELO - Desktop) --- */
 header {
     position: fixed; top: 0; left: 0; width: 100%; padding: 25px 8%; 
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(5, 10, 8, 0.95); backdrop-filter: blur(10px);
     z-index: 100; 
     border-bottom: 4px solid transparent;
+    /* Efecto caramelo solo visible en PC */
     border-image: repeating-linear-gradient(45deg, var(--accent-color), var(--accent-color) 15px, #fff 15px, #fff 30px, var(--dark-accent) 30px, var(--dark-accent) 45px) 1;
     transition: padding 0.3s;
 }
@@ -318,30 +316,81 @@ section { padding: 120px 8%; min-height: 100vh; }
 }
 #scrollTopBtn:hover { background-color: #fff; color: var(--accent-color); transform: translateY(-5px); }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 1024px) { header { padding: 20px 5%; } section { padding: 100px 5%; } .home-content h1 { font-size: 4rem; } }
-@media (max-width: 768px) {
-    header { padding: 15px 24px; } section { padding: 80px 24px; } 
-    #menu-icon { display: block; }
+/* --- RESPONSIVE (MÓVIL Y TABLET - ARREGLADO Y LIMPIO) --- */
+@media (max-width: 1024px) { 
+    header { 
+        padding: 15px 5%; 
+        /* SOLUCIÓN FINAL AL PUNTO BLANCO: Borde simple */
+        border-image: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1) !important; 
+    }
+    
+    /* LIMPIEZA DE ELEMENTOS FANTASMA (Botones rotos o iconos vacíos) */
+    header > *:not(.logo):not(.navbar):not(#menu-icon) {
+        display: none !important;
+    }
+
+    /* Limpieza extrema del icono de menú */
+    #menu-icon {
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        display: block; 
+        z-index: 10002;
+    }
+    
+    /* FORZAR COLUMNA EN MÓVIL */
+    #home, #about, #stack-details, #contact { 
+        display: flex;
+        flex-direction: column !important; 
+        padding-top: 120px; 
+        text-align: center; 
+        align-items: center; 
+        justify-content: center;
+    } 
+
+    .home-content h1 { font-size: 3.5rem; margin-bottom: 15px; } 
+    .home-content h3 { font-size: 1.5rem; } 
+    
+    /* Ajustes ABOUT */
+    .about-img { 
+        margin-bottom: 50px; 
+        width: 100%; 
+        display: flex; 
+        justify-content: center; 
+    }
+    .profile-pic { width: 220px; height: 220px; }
+    
+    /* Gorro centrado en móvil */
+    .about-img::before { 
+        left: 50%; 
+        top: -45px; 
+        transform: translateX(-20px) rotate(10deg) scale(0.8); 
+    }
+
+    .about-content { width: 100%; padding: 0 10px; }
+
+    /* Menú Móvil */
     .navbar {
-        position: absolute; top: 100%; left: 0; width: 100%; padding: 1.5rem 5%; background: rgba(5,10,8,0.95); border-top: 1px solid #333; display: none; flex-direction: column;
+        position: absolute; top: 100%; left: 0; width: 100%; padding: 2rem 5%; 
+        background: rgba(5,10,8,0.98); border-top: 1px solid #333; display: none; flex-direction: column;
+        z-index: 10000;
     }
     .navbar.active { display: flex; } 
-    
-    .home-content h1 { font-size: 3rem; margin-bottom: 15px; } .home-content h3 { font-size: 1.5rem; } .text-animate h3 { font-size: 1.8rem; }
-    .about-img { margin-bottom: 40px; width: 100%; } .profile-pic { width: 220px; height: 220px; margin: 0 auto; }
-    
-    /* Ajuste gorro móvil */
-    .about-img::before { left: 50%; top: -30px; transform: translateX(20px) rotate(15deg) scale(0.8); }
+    .navbar a { display: block; font-size: 1.5rem; margin: 1.5rem 0; border-bottom: 1px solid #333; padding-bottom: 15px; text-align: center;}
 
-    .contact-container { flex-direction: column; width: 100%; } .contact-card { width: 100%; margin-bottom: 10px; }
-    .stack-card { text-align: center; padding: 40px 20px; } .stack-tags { justify-content: center; }
+    /* Contenedores generales */
+    .contact-container { flex-direction: column; width: 100%; } 
+    .contact-card { width: 100%; margin-bottom: 15px; }
+    .stack-card { padding: 40px 20px; margin-bottom: 20px; } 
     
-    /* Ajuste títulos móvil */
-    .heading { font-size: 2.2rem; margin-bottom: 40px; }
-    .heading::before, .heading::after { font-size: 2rem; }
-    
-    :root { --card-width: 300px; --port-card-width: 300px; }
+    /* Sliders */
+    :root { --card-width: 280px; --port-card-width: 280px; } 
     #testimonials { padding: 60px 0; }
     .portfolio-card { height: 200px; }
+    
+    /* Títulos */
+    .heading { font-size: 2.5rem; margin-bottom: 40px; }
+    .heading::before, .heading::after { font-size: 2rem; }
 }
