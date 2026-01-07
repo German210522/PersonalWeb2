@@ -8,164 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles.css">
-
-    <style>
-        body {
-            background-color: #0b0c10;
-        }
-
-        /* ENCABEZADO */
-        .page-header {
-            min-height: 60vh; 
-            background: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.95)), url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 40px; 
-            padding-bottom: 120px; /* Espacio extra para que el contenido respire */
-            position: relative;
-            z-index: 1; 
-        }
-
-        /* ESTILO DEL LOGO NUEVO */
-        .hero-logo {
-            max-width: 150px; /* Ajusta este tamaño según tu logo (ej: 180px o 120px) */
-            height: auto;
-            margin-bottom: 25px; /* Espacio entre el logo y el título */
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); /* Sombra para resaltar sobre el fondo */
-            animation: fadeInDown 1s ease-out; /* Pequeña animación de entrada */
-        }
-        
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* CONTENEDOR DE TARJETAS */
-        .detail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 0 8%;
-            margin-top: -100px; /* Sube las tarjetas sobre el header */
-            position: relative; 
-            z-index: 100; /* Asegura que se vean encima */
-        }
-
-        .feature-item {
-            background: #1f2833;
-            padding: 40px 30px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid transparent; 
-            transition: 0.4s;
-            position: relative;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-item:hover {
-            border-color: #66fcf1;
-            transform: translateY(-10px);
-            box-shadow: 0 0 25px rgba(102, 252, 241, 0.15);
-        }
-
-        .feature-item i {
-            font-size: 3.5rem;
-            color: #66fcf1;
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
-        
-        .feature-item h3 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .feature-item p {
-            font-size: 1rem;
-            color: #a0a0a0;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .hover-cta {
-            color: #66fcf1;
-            font-weight: bold;
-            font-size: 0.9rem;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .feature-item:hover .hover-cta {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* BOTÓN VOLVER */
-        .back-btn {
-            position: fixed;
-            top: 25px;
-            left: 5%;
-            z-index: 1000;
-            background: rgba(11, 12, 16, 0.8);
-            backdrop-filter: blur(5px);
-            padding: 10px 20px;
-            border-radius: 30px;
-            color: #fff;
-            text-decoration: none;
-            border: 1px solid #66fcf1;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-        }
-        .back-btn:hover { background: #66fcf1; color: #0b0c10; box-shadow: 0 0 15px rgba(102, 252, 241, 0.4); }
-
-        /* MARCAS */
-        .brands-container {
-            margin-top: 100px; 
-            text-align: center; 
-            padding: 0 20px;
-        }
-        .brand-item {
-            transition: 0.3s; 
-            cursor: default;
-        }
-        .brand-item:hover {
-            color: #66fcf1 !important;
-            text-shadow: 0 0 15px rgba(102, 252, 241, 0.5);
-        }
-
-    </style>
 </head>
 <body>
 
     <a href="index.html" class="back-btn"><i class='bx bx-arrow-back'></i> Volver al Inicio</a>
 
-    <header class="page-header">
-        <div style="max-width: 900px; padding: 0 20px; display: flex; flex-direction: column; align-items: center;">
-            
+    <header class="cctv-header">
+        <div class="cctv-hero-content">
             <img src="Imagenes/safecamg.png" alt="Logo Jz Systems" class="hero-logo">
-            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 20px; line-height: 1.1;">Sistemas de <span style="color: #66fcf1;">Seguridad CCTV</span></h1>
-            <p style="font-size: 1.2rem; color: #ccc;">Protege lo que más importa con tecnología de vigilancia de última generación.</p>
+            <h1 class="cctv-title">Sistemas de <span style="color: var(--accent-color);">Seguridad CCTV</span></h1>
+            <p class="cctv-subtitle">Protege lo que más importa con tecnología de vigilancia de última generación.</p>
         </div>
     </header>
 
-    <section style="padding-bottom: 80px;">
+    <section>
         
         <div class="detail-grid">
             
@@ -173,35 +29,31 @@
                 <i class='bx bx-mobile-alt'></i>
                 <h3>Monitoreo Remoto</h3>
                 <p>Visualiza tus cámaras en tiempo real desde cualquier parte del mundo usando tu Smartphone o PC.</p>
-                
             </div>
 
             <div class="feature-item">
                 <i class='bx bx-hdd'></i>
                 <h3>Grabación Continua</h3>
                 <p>Instalación de discos duros especiales para vigilancia 24/7 con soporte para historial de 30 días.</p>
-                
             </div>
 
             <div class="feature-item">
                 <i class='bx bxs-cctv'></i>
                 <h3>Alta Definición</h3>
                 <p>Cámaras Full HD (1080p) y 4K con visión nocturna infrarroja y detección de movimiento.</p>
-                
             </div>
             
              <div class="feature-item">
                 <i class='bx bx-wrench'></i>
                 <h3>Soporte Técnico</h3>
                 <p>Limpieza de lentes, reubicación de equipos, actualización de firmware y soporte post-venta.</p>
-                
             </div>
 
         </div>
 
         <div class="brands-container">
             <h3 style="color: #fff; margin-bottom: 30px; font-size: 1.5rem;">Marcas con las que trabajo:</h3>
-            <div style="display: flex; justify-content: center; gap: 40px; color: gray; font-size: 1.2rem; flex-wrap: wrap; font-weight: bold;">
+            <div class="brands-list">
                 <span class="brand-item">HIKVISION</span> 
                 <span class="brand-item">DAHUA</span> 
                 <span class="brand-item">UNV</span> 
@@ -209,13 +61,13 @@
             </div>
         </div>
         
-        <div style="margin-top: 80px; text-align: center;">
+        <div class="cta-container">
             <a href="https://wa.me/+50243072490?text=Hola,%20me%20interesa%20una%20cotización%20de%20cámaras." target="_blank" class="btn-box">Cotizar Instalación Ahora</a>
         </div>
 
     </section>
 
-    <footer style="text-align: center; padding: 20px; background: #000; color: #555; border-top: 1px solid #222;">
+    <footer>
         <p>SafeCam By G&M - Soluciones en Seguridad</p>
     </footer>
 

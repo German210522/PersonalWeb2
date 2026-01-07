@@ -1,28 +1,22 @@
-/* --- VARIABLES Y RESET (EDICIÓN NAVIDAD FINAL - LIMPIA) --- */
+/* --- VARIABLES Y RESET (TEMA TECH/CYBER) --- */
 :root {
-    --bg-color: #050a08; /* Noche de Navidad (Negro verdoso) */
-    --secondary-bg: #141a17;
-    --text-color: #e0e0e0;
+    --bg-color: #0b0c10;      /* Fondo principal muy oscuro */
+    --secondary-bg: #1f2833;  /* Fondo secundario (tarjetas) */
+    --text-color: #c5c6c7;    /* Texto gris claro legible */
     
-    /* PALETA NAVIDEÑA */
-    --accent-color: #d42426; /* Rojo Santa */
-    --dark-accent: #165b33;  /* Verde Pino */
-    --gold-accent: #f0a500;  /* Dorado Estrella */
+    /* ACENTOS */
+    --accent-color: #66fcf1;  /* Cian Eléctrico (Color principal) */
+    --dark-accent: #45a29e;   /* Cian oscurecido (Hover/Detalles) */
     
-    /* Color de la nieve */
-    --snow-color: rgba(255, 255, 255, 0.9);
-
-    /* Variables Sliders */
+    /* Dimensiones */
     --card-width: 350px;
     --card-gap: 30px;
     --port-card-width: 400px;
     --port-card-gap: 30px;
-    --brand-red: #e60023; 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
 
-/* --- FONDO BASE --- */
 body { 
     background-color: var(--bg-color); 
     color: var(--text-color); 
@@ -31,41 +25,15 @@ body {
     position: relative; 
 }
 
-/* --- CAPA DE NIEVE (POR ENCIMA DE TODO) ❄️ --- */
-body::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; /* Permite hacer clic a través de la nieve */
-    z-index: 9999; /* Encima de todo */
-    
-    /* Copos de nieve */
-    background-image: 
-        radial-gradient(var(--snow-color) 2px, transparent 3px),
-        radial-gradient(var(--snow-color) 1.5px, transparent 2.5px),
-        radial-gradient(var(--snow-color) 1px, transparent 2px);
-    
-    background-size: 500px 500px, 400px 400px, 300px 300px;
-    background-position: 0 0, 0 0, 0 0;
-    animation: snowfall 10s linear infinite;
-    opacity: 0.8;
-}
-
-@keyframes snowfall {
-    0% { background-position: 0 0, 0 0, 0 0; }
-    100% { background-position: 0 500px, 0 400px, 0 300px; }
-}
-
-/* --- ANIMACIONES GENERALES --- */
+/* --- ANIMACIONES --- */
 @keyframes light-shimmer { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
 @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(212, 36, 38, 0.4); }
-    70% { box-shadow: 0 0 0 20px rgba(212, 36, 38, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(212, 36, 38, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0.4); }
+    70% { box-shadow: 0 0 0 20px rgba(102, 252, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0); }
 }
 @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes floatHead { 0%, 100% { transform: translateX(20px) rotate(15deg) translateY(0); } 50% { transform: translateX(20px) rotate(15deg) translateY(-10px); } }
-
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- PANTALLA DE CARGA --- */
 #intro-overlay {
@@ -76,27 +44,17 @@ body::after {
     padding: 20px;
 }
 .login-box { text-align: center; width: 90%; max-width: 400px; }
-
 .user-avatar {
-    width: 150px; height: 150px; /* Tamaño grande para móvil */
-    background: #151515; border-radius: 50%;
-    margin: 0 auto 25px; border: 4px solid #fff; 
+    width: 150px; height: 150px; background: #151515; border-radius: 50%;
+    margin: 0 auto 25px; border: 4px solid var(--accent-color); 
     display: flex; align-items: center; justify-content: center; overflow: hidden;
-    box-shadow: 0 0 30px rgba(212, 36, 38, 0.6); 
-    animation: pulse-glow 2s infinite;
+    box-shadow: 0 0 30px rgba(102, 252, 241, 0.3); animation: pulse-glow 2s infinite;
 }
 .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
 .welcome-text { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
-.status-text { color: var(--gold-accent); margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
-.loading-bar-container { width: 100%; height: 15px; background: #222; margin-top: 30px; border-radius: 10px; overflow: hidden; }
-
-/* Barra rayada tipo dulce */
-.loading-bar { 
-    width: 0%; height: 100%; 
-    background: repeating-linear-gradient(45deg, var(--accent-color), var(--accent-color) 15px, #fff 15px, #fff 30px);
-    border-radius: 10px; box-shadow: 0 0 15px var(--accent-color); 
-}
+.status-text { color: var(--accent-color); margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
+.loading-bar-container { width: 100%; height: 8px; background: #333; margin-top: 30px; border-radius: 10px; overflow: hidden; }
+.loading-bar { width: 0%; height: 100%; background: var(--accent-color); box-shadow: 0 0 15px var(--accent-color); transition: width 0.1s linear; }
 .percentage { color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 1rem; margin-top: 10px; display: block; text-align: right; }
 
 /* --- MODAL DE ÉXITO --- */
@@ -105,126 +63,394 @@ body::after {
     background: rgba(0,0,0,0.8); z-index: 10001; justify-content: center; align-items: center; backdrop-filter: blur(5px);
 }
 .modal-content {
-    background: var(--secondary-bg); padding: 50px; border-radius: 20px; text-align: center;
-    border: 2px solid var(--accent-color); box-shadow: 0 0 40px rgba(212, 36, 38, 0.3);
+    background: var(--secondary-bg); padding: 50px; border-radius: 10px; text-align: center;
+    border: 1px solid var(--accent-color); box-shadow: 0 0 40px rgba(102, 252, 241, 0.2);
     max-width: 450px; width: 90%; animation: popIn 0.3s ease-out;
 }
 .modal-icon { font-size: 5rem; color: var(--accent-color); margin-bottom: 25px; }
-.modal-title { font-size: 2.2rem; margin-bottom: 15px; color: var(--gold-accent); }
+.modal-title { font-size: 2.2rem; margin-bottom: 15px; color: #fff; }
 .modal-text { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
 .close-btn {
-    background: var(--accent-color); color: #fff; border: none; padding: 12px 35px;
-    font-weight: bold; font-size: 1.1rem; border-radius: 5px; cursor: pointer; transition: .3s;
+    background: transparent; color: var(--accent-color); border: 2px solid var(--accent-color); 
+    padding: 12px 35px; font-weight: bold; font-size: 1.1rem; border-radius: 5px; cursor: pointer; transition: .3s;
 }
-.close-btn:hover { background: #fff; color: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); }
+.close-btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 20px var(--accent-color); }
 
-/* --- HEADER (DECORACIÓN CARAMELO - Desktop) --- */
+/* --- HEADER PRINCIPAL --- */
 header {
-    position: fixed; top: 0; left: 0; width: 100%; padding: 25px 8%; 
+    position: fixed; top: 0; left: 0; width: 100%; padding: 20px 8%; 
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(5, 10, 8, 0.95); backdrop-filter: blur(10px);
-    z-index: 100; 
-    border-bottom: 4px solid transparent;
-    /* Efecto caramelo solo visible en PC */
-    border-image: repeating-linear-gradient(45deg, var(--accent-color), var(--accent-color) 15px, #fff 15px, #fff 30px, var(--dark-accent) 30px, var(--dark-accent) 45px) 1;
-    transition: padding 0.3s;
+    background: rgba(11, 12, 16, 0.95); backdrop-filter: blur(10px); z-index: 100; 
+    border-bottom: 1px solid rgba(102, 252, 241, 0.1); transition: padding 0.3s;
 }
+/* Busca y REEMPLAZA la clase .logo por esta versión mejorada: */
 
 .logo { 
-    font-size: 1.8rem; font-weight: 800; color: transparent; 
-    text-transform: uppercase; letter-spacing: 2px; text-decoration: none;
-    background: linear-gradient(90deg, #fff 0%, var(--accent-color) 100%);
-    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
-    animation: light-shimmer 2.5s linear infinite;
+    font-size: 1.8rem; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    text-decoration: none; 
+    
+    /* EL SECRETO: Un gradiente complejo para simular brillo metálico */
+    background: linear-gradient(
+        120deg, 
+        #ffffff 0%, 
+        #ffffff 40%, 
+        var(--accent-color) 50%,  /* El punto brillante (Cian) */
+        #ffffff 60%, 
+        #ffffff 100%
+    );
+    
+    background-size: 200% auto; /* Tamaño doble para poder moverlo */
+    
+    /* Hacemos que el fondo sea el color del texto */
+    color: #fff; /* Fallback por si acaso */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    
+    /* Animación más lenta y fluida (ease-in-out) */
+    animation: shine-pass 4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
-.navbar a { font-size: 1.1rem; color: #fff; text-decoration: none; font-weight: 500; margin-left: 40px; transition: .3s; }
-.navbar a:hover, .navbar a.active { color: var(--gold-accent); text-shadow: 0 0 5px var(--gold-accent); }
-#menu-icon { font-size: 3rem; color: #fff; display: none; cursor: pointer; }
 
-/* --- SECCIONES COMUNES --- */
-section { padding: 120px 8%; min-height: 100vh; }
+/* Agrega un pequeño brillo (glow) suave al pasar el mouse para interactividad */
+.logo:hover {
+    text-shadow: 0 0 20px rgba(102, 252, 241, 0.6);
+}
 
-/* Títulos con Árboles de Navidad 🎄 */
-.heading { font-size: 3.5rem; text-align: center; margin-bottom: 60px; color: var(--gold-accent); }
-.heading span { color: var(--accent-color); }
-.heading::before { content: "🎄 "; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); font-size: 3rem; }
-.heading::after { content: " 🎄"; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); font-size: 3rem; }
+/* --- ANIMACIÓN KEYFRAMES --- */
+@keyframes shine-pass {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+.logo:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
 
-/* --- HOME --- */
+.navbar a { font-size: 1rem; color: #fff; text-decoration: none; font-weight: 500; margin-left: 40px; transition: .3s; position: relative; }
+.navbar a:hover, .navbar a.active { color: var(--accent-color); }
+.navbar a::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background: var(--accent-color); transition: 0.3s; }
+.navbar a:hover::after, .navbar a.active::after { width: 100%; }
+
+/* --- CLASE PARA ANIMACIÓN DE TEXTO (Igual al Logo) --- */
+.hero-title-anim {
+    /* Mismo gradiente y animación que el logo */
+    background: linear-gradient(
+        120deg, 
+        var(--accent-color) 0%, 
+        #ffffff 20%, 
+        var(--accent-color) 50%, 
+        #ffffff 80%, 
+        var(--accent-color) 100%
+    );
+    background-size: 200% auto;
+    
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    animation: shine-pass 4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    
+    /* Aseguramos que se vea grande e importante */
+    font-size: 5rem; 
+    font-weight: 700; 
+    line-height: 1.1; 
+    margin-bottom: 10px;
+}
+
+/* Ajuste para móvil para que el texto grande no rompa la pantalla */
+@media (max-width: 768px) {
+    .hero-title-anim {
+        font-size: 3.5rem;
+    }
+}
+
+/* --- AGREGA ESTO PARA QUE NO SALGA EN PC --- */
+#menu-icon {
+    display: none; /* Esto oculta la hamburguesa en PC */
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* --- SECCIONES GENERALES (Ajustado para reducir espacios) --- */
+section { 
+    /* Reducimos el padding de 120px a 70px para acercar las secciones */
+    padding: 70px 8%; 
+    
+    /* CAMBIO CLAVE: Cambiamos 'min-height: 100vh' a 'auto'.
+       Esto hace que la sección mida solo lo que mide su contenido, 
+       eliminando el espacio vacío gigante. */
+    min-height: auto; 
+}
+
+/* ... (Las reglas de .heading siguen igual) ... */
+
+
+/* --- ESTILOS ESPECÍFICOS: HOME --- */
+#home {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10%; 
+    padding-top: 80px; 
+    
+    /* IMPORTANTE: Le devolvemos la altura completa SOLO al Inicio 
+       para que la primera impresión sea impactante */
+    min-height: 100vh; 
+    
+    /* Resto del fondo... */
+    background: linear-gradient(rgba(11, 12, 16, 0.9), rgba(11, 12, 16, 0.95)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;
+}
+/* --- TÍTULOS DE SECCIÓN --- */
+
+/* 1. El texto normal del título se queda quieto en blanco */
+.heading { 
+    font-size: 3.5rem; 
+    text-align: center; 
+    margin-bottom: 60px; 
+    color: #fff;       /* Blanco sólido */
+    font-weight: 700;
+    
+    /* Aseguramos que no tenga animación el contenedor padre */
+    background: none;
+    -webkit-text-fill-color: initial;
+    animation: none;
+}
+
+/* 2. La animación se aplica SOLO a las palabras destacadas (span) */
+.heading span { 
+    /* Gradiente: Base Cian -> Brillo Blanco -> Base Cian */
+    background: linear-gradient(
+        120deg, 
+        var(--accent-color) 0%, 
+        var(--accent-color) 40%, 
+        #ffffff 50%,  /* El rayo de luz blanca */
+        var(--accent-color) 60%, 
+        var(--accent-color) 100%
+    );
+    
+    background-size: 200% auto; /* Tamaño doble para mover el fondo */
+    
+    /* Recortamos el fondo a la forma de las letras */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Animación infinita */
+    animation: shine-pass 4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+/* Ajuste Responsive */
+@media (max-width: 768px) {
+    .heading {
+        font-size: 2.5rem; 
+        margin-bottom: 40px;
+    }
+}
+
+/* --- ESTILOS ESPECÍFICOS: HOME --- */
 #home {
     display: flex; align-items: center;
-    background: linear-gradient(rgba(5, 10, 8, 0.8), rgba(5, 10, 8, 0.9)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
+    background: linear-gradient(rgba(11, 12, 16, 0.9), rgba(11, 12, 16, 0.95)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
     background-size: cover; background-position: center; background-attachment: fixed;
 }
 .home-content h3 { font-size: 1.8rem; font-weight: 400; color: #fff; }
-.home-content h1 { font-size: 5rem; font-weight: 700; line-height: 1.1; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 0 10px rgba(212,36,38,0.8); }
-.home-content p { margin: 25px 0 45px; max-width: 650px; font-size: 1.1rem; line-height: 1.8; }
-
+.home-content h1 { font-size: 5rem; font-weight: 700; line-height: 1.1; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 0 15px rgba(102, 252, 241, 0.3); }
+.home-content p { margin: 25px 0 45px; max-width: 650px; font-size: 1.1rem; line-height: 1.8; color: var(--text-color); }
 .btn-box {
-    display: inline-block; padding: 14px 34px; background: var(--accent-color);
-    border-radius: 8px; font-weight: 600; color: #fff; text-decoration: none;
-    box-shadow: 0 0 20px rgba(212, 36, 38, 0.4); transition: .3s; border: none; cursor: pointer; font-size: 1.1rem;
+    display: inline-block; padding: 12px 30px; background: transparent;
+    border: 2px solid var(--accent-color); border-radius: 5px; font-weight: 600; 
+    color: var(--accent-color); text-decoration: none; transition: .3s; cursor: pointer; font-size: 1rem;
 }
-.btn-box:hover { box-shadow: 0 0 30px #fff; background: var(--dark-accent); color: #fff; transform: scale(1.05); }
+.btn-box:hover { box-shadow: 0 0 20px rgba(102, 252, 241, 0.4); background: var(--accent-color); color: #0b0c10; transform: translateY(-3px); }
 
-/* --- ABOUT (CON GORRO DE SANTA 🎅) --- */
+/* --- AGREGADO PARA FOTO HOME --- */
+
+/* 1. Ajustamos el contenedor principal para que ponga elementos lado a lado */
+#home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%; /* Espacio entre texto y foto */
+    padding-top: 80px; /* Un poco de aire arriba */
+}
+
+/* 2. Estilo de la Foto Circular */
+.home-img img {
+    width: 380px;       /* Tamaño del círculo */
+    height: 380px;      /* Debe ser igual al ancho para ser círculo perfecto */
+    border-radius: 50%; /* Esto lo hace redondo */
+    object-fit: cover;  /* Asegura que la foto no se estire feo */
+    
+    /* Estilo Tech */
+    border: 4px solid var(--accent-color); 
+    box-shadow: 0 0 40px var(--accent-color); /* Resplandor Cian */
+    
+    /* La Animación Mágica */
+    animation: floatImage 4s ease-in-out infinite;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* Efecto al pasar el mouse (opcional) */
+.home-img img:hover {
+    box-shadow: 0 0 80px var(--accent-color), 0 0 20px #fff;
+    border-color: #fff;
+}
+
+/* 3. Definición de la animación (Sube y Baja) */
+@keyframes floatImage {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-25px); /* Sube 25 pixeles */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 4. AJUSTE RESPONSIVE (IMPORTANTE) */
+/* Busca tu @media (max-width: 1024px) existente y asegúrate de incluir esto dentro: */
+
+@media (max-width: 1024px) {
+    #home {
+        flex-direction: column-reverse; /* En celular: Foto arriba, texto abajo */
+        gap: 30px;
+        text-align: center;
+    }
+
+    .home-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* En celular hacemos la foto un poco más pequeña */
+    .home-img img {
+        width: 260px;
+        height: 260px;
+        margin-top: 30px;
+    }
+    
+    /* Centrar los botones en celular */
+    .home-content div[style*="display: flex"] {
+        justify-content: center !important;
+    }
+}
+
+/* --- ESTILOS ESPECÍFICOS: ABOUT --- */
 #about { background-color: var(--secondary-bg); display: flex; align-items: center; gap: 60px; }
-.about-img { flex: 1; text-align: center; position: relative; }
-
-/* GORRO FLOTANTE */
-.about-img::before {
-    content: "🎅";
-    font-size: 100px;
-    position: absolute;
-    top: -55px; left: 50%;
-    transform: translateX(20px) rotate(15deg);
-    z-index: 10;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
-    animation: floatHead 3s ease-in-out infinite;
-}
-
-.profile-pic { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-color); box-shadow: 0 0 40px rgba(212, 36, 38, 0.5); }
+.about-img { flex: 1; text-align: center; }
+.profile-pic { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-color); box-shadow: 0 0 30px rgba(102, 252, 241, 0.2); transition: 0.5s; }
+.profile-pic:hover { filter: grayscale(100%); }
 .about-content { flex: 1.5; }
-.about-content h3 { font-size: 2rem; margin-bottom: 15px; color: var(--gold-accent); }
-.about-content p { font-size: 1.1rem; line-height: 1.8; }
+.about-content h3 { font-size: 2rem; margin-bottom: 15px; color: #fff; }
+.about-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
 
-/* Icono de regalo en botón de CV */
-.about-content .btn-box::after { content: " 🎁"; } 
+/* --- ESTILOS ESPECÍFICOS: ABOUT (MODO TEXTO) --- */
+#about { 
+    background-color: var(--secondary-bg); 
+    display: block; /* Cambiamos flex por block para centrar todo */
+    text-align: center;
+}
 
-/* --- TARJETAS ESTILO NIEVE --- */
+.about-content { 
+    width: 100%; 
+    padding: 20px;
+}
+
+.about-content h3 { 
+    font-size: 2.2rem; 
+    margin-bottom: 25px; 
+    color: var(--accent-color); /* Resaltamos el subtítulo en Cian */
+}
+
+.about-content p { 
+    font-size: 1.15rem; 
+    line-height: 1.9; 
+    margin-bottom: 25px; 
+    color: #ccc;
+    text-align: justify; /* Justificado para que se vea como bloque profesional */
+    text-align-last: center; /* La última línea centrada queda elegante */
+}
+
+/* Ajuste para móvil para que el texto no quede muy pegado a los bordes */
+@media (max-width: 768px) {
+    .about-content p {
+        text-align: left; /* En celular es mejor leer alineado a la izquierda */
+        font-size: 1rem;
+    }
+}
+
+/* --- TARJETAS UNIFICADAS (Stack, Servicios, Contacto) --- */
 .stack-card, .service-box, .contact-card {
-    background: #161b22; padding: 40px 30px; border-radius: 20px; 
-    border-top: 4px solid rgba(255,255,255,0.5); /* Nieve acumulada */
-    transition: all 0.4s ease; text-align: center; position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: #15191d; padding: 40px 30px; border-radius: 10px; border: 1px solid #333;
+    transition: all 0.4s ease; text-align: center; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
-
 .stack-card:hover, .service-box:hover, .contact-card:hover { 
-    transform: translateY(-10px); 
-    border-color: var(--accent-color); 
-    box-shadow: 0 0 20px rgba(212, 36, 38, 0.4);
+    transform: translateY(-10px); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(102, 252, 241, 0.15);
 }
 
-/* --- ARQUITECTURA & SERVICIOS --- */
-#stack-details { background-color: #0f1115; text-align: center; }
+/* --- ARQUITECTURA --- */
+#stack-details { background-color: #0b0c10; text-align: center; }
 .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-top: 60px; }
-.stack-icon { font-size: 4.5rem; color: var(--accent-color); margin-bottom: 30px; display: inline-block; }
-.stack-card h3 { font-size: 2rem; color: var(--gold-accent); margin-bottom: 20px; }
-.stack-card p { font-size: 1.15rem; color: #a0a0a0; line-height: 1.8; margin-bottom: 25px; }
-.stack-tags { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.stack-icon { font-size: 4rem; color: var(--accent-color); margin-bottom: 25px; display: inline-block; }
+.stack-card h3 { font-size: 1.8rem; color: #fff; margin-bottom: 20px; }
+.stack-card p { font-size: 1rem; color: #a0a0a0; line-height: 1.6; margin-bottom: 25px; }
+.stack-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .tech-tag {
-    background: rgba(22, 91, 51, 0.3); /* Fondo Verde Pino */
-    color: #fff; padding: 8px 15px; border-radius: 25px; 
-    font-size: 0.9rem; font-weight: 600; border: 1px solid var(--dark-accent);
+    background: rgba(102, 252, 241, 0.1); color: var(--accent-color); padding: 5px 15px; 
+    border-radius: 4px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(102, 252, 241, 0.3);
     font-family: 'JetBrains Mono', monospace;
 }
 
+/* --- SERVICIOS --- */
 .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-.service-box i { font-size: 4rem; color: var(--accent-color); margin-bottom: 20px; }
-.service-box h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--gold-accent); }
-.service-box p { font-size: 1.1rem; line-height: 1.6; }
+/* Busca y REEMPLAZA la regla de .service-box i por esto: */
 
-/* --- PROJECTS (CARRUSEL ROJO INFINITO) --- */
+/* Busca y REEMPLAZA el bloque de .service-box i por este COMBO: */
+
+/* Aplicamos estilos a AMBOS tipos de tarjeta: Servicios (Inicio) y Features (CCTV) */
+.service-box i, 
+.feature-item i { 
+    font-size: 3.5rem; 
+    color: var(--accent-color); 
+    margin-bottom: 20px; 
+    transition: 0.3s ease; 
+    
+    /* Brillo base suave (siempre encendido) */
+    text-shadow: 0 0 10px rgba(102, 252, 241, 0.3); 
+}
+
+/* --- EFECTO HOVER PARA AMBOS --- */
+.service-box:hover i, 
+.feature-item:hover i {
+    /* El icono crece un poquito */
+    transform: scale(1.15) translateY(-5px);
+    
+    /* El brillo se vuelve intenso (Efecto Neón Puro) */
+    text-shadow: 
+        0 0 20px var(--accent-color), 
+        0 0 40px var(--accent-color), 
+        0 0 60px rgba(102, 252, 241, 0.5);
+        
+    /* El centro se vuelve blanco por la intensidad de la luz */
+    color: #fff; 
+}
+.service-box h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fff; }
+.service-box p { font-size: 1rem; line-height: 1.6; color: #ccc;}
+
+/* --- PROYECTOS (CARRUSEL) --- */
 .portfolio-slider {
     width: 100%; overflow: hidden; position: relative; padding: 20px 0;
     mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
@@ -239,158 +465,236 @@ section { padding: 120px 8%; min-height: 100vh; }
 @keyframes scroll-portfolio { 0% { transform: translateX(0); } 100% { transform: translateX(calc((var(--port-card-width) + var(--port-card-gap)) * -4)); } }
 
 .portfolio-card {
-    position: relative; width: var(--port-card-width); height: 250px; flex-shrink: 0; border-radius: 15px; overflow: hidden;
-    border: 2px solid #333; cursor: pointer; text-decoration: none;
+    position: relative; width: var(--port-card-width); height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden;
+    border: 1px solid #333; cursor: pointer; text-decoration: none; background: #000;
 }
-.portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.9; }
+.portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.7; }
 .portfolio-card:hover img { transform: scale(1.1); opacity: 0.4; }
-
-/* Overlay Rojo Navideño */
 .portfolio-overlay {
     position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to top, rgba(200, 0, 30, 0.95) 0%, rgba(200, 0, 30, 0.6) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0.7) 60%, transparent 100%);
     display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
     transform: translateY(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 20px;
 }
 .portfolio-card:hover .portfolio-overlay { transform: translateY(0); }
-.portfolio-overlay h4 { font-size: 1.8rem; color: #fff; margin-bottom: 5px; font-weight: 800; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-.portfolio-overlay p { font-size: 1rem; color: #ffd1d1; margin-bottom: 20px; font-weight: 500; }
+.portfolio-overlay h4 { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 5px; font-weight: 700; text-transform: uppercase; }
+.portfolio-overlay p { font-size: 1rem; color: #fff; margin-bottom: 20px; }
 .portfolio-overlay i {
-    font-size: 1.8rem; color: var(--brand-red); background: #fff; border-radius: 50%; padding: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;
+    font-size: 1.8rem; color: #0b0c10; background: var(--accent-color); border-radius: 50%; padding: 10px;
+    box-shadow: 0 0 15px rgba(102, 252, 241, 0.5); transition: 0.3s;
 }
-.portfolio-overlay i:hover { transform: scale(1.1) rotate(45deg); background: #000; color: #fff; }
+.portfolio-overlay i:hover { transform: scale(1.1); background: #fff; }
 
-/* --- TESTIMONIOS (CARRUSEL CLÁSICO) --- */
+/* --- TESTIMONIOS --- */
 #testimonials { background-color: var(--secondary-bg); padding: 100px 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
 .slider-container { width: 100%; margin-top: 40px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
 .slider-track { display: flex; gap: var(--card-gap); width: calc((var(--card-width) + var(--card-gap)) * 12); animation: scroll 40s linear infinite; }
 .slider-track:hover { animation-play-state: paused; }
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc((var(--card-width) + var(--card-gap)) * -6)); } }
-
 .testimonial-card {
-    background: #161b22; width: var(--card-width); flex-shrink: 0; padding: 40px 30px; border-radius: 15px; 
-    border: 1px solid #333; border-top: 3px solid rgba(255,255,255,0.3); /* Nieve */
-    text-align: left; display: flex; flex-direction: column; justify-content: space-between;
+    background: #15191d; width: var(--card-width); flex-shrink: 0; padding: 40px 30px; border-radius: 10px; 
+    border: 1px solid #333; text-align: left; display: flex; flex-direction: column; justify-content: space-between;
 }
-.testimonial-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
-.quote-icon { font-size: 3rem; color: var(--gold-accent); margin-bottom: 20px; opacity: 0.8; }
+.testimonial-card:hover { transform: translateY(-5px); border-color: var(--accent-color); box-shadow: 0 0 15px rgba(102, 252, 241, 0.1); }
+.quote-icon { font-size: 3rem; color: var(--dark-accent); margin-bottom: 20px; opacity: 0.5; }
 .testimonial-card p { font-size: 1rem; color: #ccc; line-height: 1.6; font-style: italic; margin-bottom: 25px; }
 .client-info h4 { color: #fff; font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; }
-.client-info span { color: var(--dark-accent); font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
+.client-info span { color: var(--accent-color); font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
 
 /* --- CONTACTO --- */
-#contact { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#contact { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0b0c10; }
 .contact-content { text-align: center; max-width: 900px; width: 100%; }
 .contact-container { display: flex; justify-content: center; gap: 30px; margin-top: 50px; margin-bottom: 50px; flex-wrap: wrap; }
-
-/* Efecto Esfera Navideña */
 .contact-card {
-    transform-origin: top center;
-    background: var(--secondary-bg); padding: 30px; border-radius: 15px; text-align: center; min-width: 180px; border: 1px solid #333;
+    background: var(--secondary-bg); padding: 30px; border-radius: 10px; text-align: center; min-width: 180px; border: 1px solid #333;
     text-decoration: none; color: #fff; transition: .3s;
 }
-.contact-card:hover { 
-    animation: swing 2s ease-in-out infinite; 
-    background: var(--dark-accent); 
-    border-color: #fff;
-}
-@keyframes swing { 0% { transform: rotate(0deg); } 20% { transform: rotate(5deg); } 40% { transform: rotate(-5deg); } 60% { transform: rotate(3deg); } 80% { transform: rotate(-3deg); } 100% { transform: rotate(0deg); } }
-
+.contact-card:hover { transform: translateY(-5px); border-color: var(--accent-color); box-shadow: 0 0 20px rgba(102, 252, 241, 0.2); }
 .contact-card i { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
-.contact-card h4 { margin-bottom: 8px; font-size: 1.2rem; color: var(--gold-accent); }
+.contact-card h4 { margin-bottom: 8px; font-size: 1.2rem; color: #fff; }
 .contact-card p { font-size: 0.95rem; color: #aaa; }
-
-.contact-form { max-width: 700px; margin: 0 auto; background: var(--secondary-bg); padding: 40px; border-radius: 15px; border: 1px solid #333; display: flex; flex-direction: column; gap: 20px; }
-.contact-form h3 { margin-bottom: 20px; color: var(--accent-color); font-size: 1.5rem; }
-.contact-form input, .contact-form textarea { width: 100%; padding: 18px; background: #050a08; border: 1px solid #333; color: #fff; border-radius: 8px; font-size: 1.1rem; outline: none; transition: .3s; }
-.contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); }
+.contact-form { max-width: 700px; margin: 0 auto; background: var(--secondary-bg); padding: 40px; border-radius: 10px; border: 1px solid #333; display: flex; flex-direction: column; gap: 20px; }
+.contact-form h3 { margin-bottom: 20px; color: #fff; font-size: 1.5rem; }
+.contact-form input, .contact-form textarea { width: 100%; padding: 18px; background: #0b0c10; border: 1px solid #333; color: #fff; border-radius: 5px; font-size: 1rem; outline: none; transition: .3s; }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent-color); box-shadow: 0 0 10px rgba(102, 252, 241, 0.1); }
 .contact-form textarea { resize: none; height: 180px; }
 
 /* Botón flotante */
 #scrollTopBtn {
     display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99;
-    font-size: 1.8rem; background-color: var(--accent-color); color: #fff; 
-    padding: 12px 18px; border-radius: 12px; border: none; cursor: pointer;
-    box-shadow: 0 0 20px rgba(212, 36, 38, 0.4); transition: 0.3s;
+    font-size: 1.8rem; background-color: var(--secondary-bg); color: var(--accent-color); 
+    padding: 12px 18px; border-radius: 5px; border: 1px solid var(--accent-color); cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); transition: 0.3s;
 }
-#scrollTopBtn:hover { background-color: #fff; color: var(--accent-color); transform: translateY(-5px); }
+#scrollTopBtn:hover { background-color: var(--accent-color); color: #0b0c10; transform: translateY(-5px); }
 
-/* --- RESPONSIVE (MÓVIL Y TABLET - ARREGLADO Y LIMPIO) --- */
+/* --- ESTILOS ESPECÍFICOS: CCTV (Página Interna) --- */
+.back-btn {
+    position: fixed; top: 25px; left: 5%; z-index: 1000;
+    background: rgba(11, 12, 16, 0.8); backdrop-filter: blur(5px);
+    padding: 10px 20px; border-radius: 30px;
+    color: #fff; text-decoration: none; border: 1px solid var(--accent-color);
+    transition: 0.3s; display: flex; align-items: center; gap: 10px; font-weight: 600;
+}
+.back-btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 15px rgba(102, 252, 241, 0.4); }
+
+.cctv-header {
+    min-height: 60vh; 
+    background: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.95)), url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover; background-position: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding-top: 40px; padding-bottom: 120px;
+    position: relative; z-index: 1; 
+}
+
+.cctv-hero-content { max-width: 900px; padding: 0 20px; display: flex; flex-direction: column; align-items: center; }
+.hero-logo { max-width: 150px; height: auto; margin-bottom: 25px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); animation: fadeInDown 1s ease-out; }
+.cctv-title { font-size: 3.5rem; color: white; margin-bottom: 20px; line-height: 1.1; font-weight: 700; }
+.cctv-subtitle { font-size: 1.2rem; color: #ccc; }
+
+.detail-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; padding: 0 8%; margin-top: -100px; position: relative; z-index: 100;
+}
+/* Reutilizamos el estilo de 'feature-item' que es muy similar a service-box, pero lo definimos específico por si acaso */
+.feature-item {
+    background: var(--secondary-bg); padding: 40px 30px; border-radius: 10px;
+    text-align: center; border: 1px solid #333; transition: 0.4s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.feature-item:hover { border-color: var(--accent-color); transform: translateY(-10px); box-shadow: 0 0 25px rgba(102, 252, 241, 0.15); }
+.feature-item i { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 20px; transition: 0.3s; }
+.feature-item h3 { color: #fff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 700; }
+.feature-item p { font-size: 1rem; color: #a0a0a0; line-height: 1.6; margin-bottom: 20px; }
+
+.brands-container { margin-top: 100px; text-align: center; padding: 0 20px; }
+.brands-list { display: flex; justify-content: center; gap: 40px; color: gray; font-size: 1.2rem; flex-wrap: wrap; font-weight: bold; margin-top: 30px; }
+.brand-item { transition: 0.3s; cursor: default; }
+.brand-item:hover { color: var(--accent-color) !important; text-shadow: 0 0 15px rgba(102, 252, 241, 0.5); }
+.cta-container { margin-top: 80px; text-align: center; padding-bottom: 80px; }
+
+/* FOOTER UNIFICADO */
+footer { text-align: center; padding: 20px; background: #000; color: #555; border-top: 1px solid #222; }
+
+/* --- RESPONSIVE (MÓVIL Y TABLET) --- */
 @media (max-width: 1024px) { 
-    header { 
-        padding: 15px 5%; 
-        /* SOLUCIÓN FINAL AL PUNTO BLANCO: Borde simple */
-        border-image: none !important;
-        border-bottom: 1px solid rgba(255,255,255,0.1) !important; 
-    }
+    header { padding: 15px 5%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    /* Corrección: Solo oculta elementos en el header principal, NO en el de CCTV */
+header:not(.cctv-header) > *:not(.logo):not(.navbar):not(#menu-icon) { 
+    display: none !important; 
+}
     
-    /* LIMPIEZA DE ELEMENTOS FANTASMA (Botones rotos o iconos vacíos) */
-    header > *:not(.logo):not(.navbar):not(#menu-icon) {
-        display: none !important;
-    }
-
-    /* Limpieza extrema del icono de menú */
     #menu-icon {
-        border: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        display: block; 
+        display: block;
+        font-size: 2.8rem;
+        color: #fff;
+        cursor: pointer;
+        border: none !important; outline: none !important; background: transparent !important; box-shadow: none !important;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), color 0.3s ease, text-shadow 0.3s ease;
         z-index: 10002;
     }
+    #menu-icon.bx-x {
+        transform: rotate(90deg); color: var(--accent-color); text-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+    }
     
-    /* FORZAR COLUMNA EN MÓVIL */
-    #home, #about, #stack-details, #contact { 
-        display: flex;
-        flex-direction: column !important; 
-        padding-top: 120px; 
-        text-align: center; 
-        align-items: center; 
-        justify-content: center;
+    #home, #about, #stack-details, #contact, .cctv-header { 
+        display: flex; flex-direction: column !important; padding-top: 120px; text-align: center; align-items: center; justify-content: center;
     } 
-
     .home-content h1 { font-size: 3.5rem; margin-bottom: 15px; } 
     .home-content h3 { font-size: 1.5rem; } 
-    
-    /* Ajustes ABOUT */
-    .about-img { 
-        margin-bottom: 50px; 
-        width: 100%; 
-        display: flex; 
-        justify-content: center; 
-    }
+    .about-img { margin-bottom: 50px; width: 100%; display: flex; justify-content: center; }
     .profile-pic { width: 220px; height: 220px; }
-    
-    /* Gorro centrado en móvil */
-    .about-img::before { 
-        left: 50%; 
-        top: -45px; 
-        transform: translateX(-20px) rotate(10deg) scale(0.8); 
-    }
-
     .about-content { width: 100%; padding: 0 10px; }
-
-    /* Menú Móvil */
     .navbar {
         position: absolute; top: 100%; left: 0; width: 100%; padding: 2rem 5%; 
-        background: rgba(5,10,8,0.98); border-top: 1px solid #333; display: none; flex-direction: column;
-        z-index: 10000;
+        background: rgba(11, 12, 16, 0.98); border-top: 1px solid #333; display: none; flex-direction: column; z-index: 10000;
     }
     .navbar.active { display: flex; } 
-    .navbar a { display: block; font-size: 1.5rem; margin: 1.5rem 0; border-bottom: 1px solid #333; padding-bottom: 15px; text-align: center;}
-
-    /* Contenedores generales */
+    .navbar a { display: block; font-size: 1.2rem; margin: 1.5rem 0; border-bottom: 1px solid #333; padding-bottom: 15px; text-align: center;}
+    .navbar a::after { display: none; }
+    
     .contact-container { flex-direction: column; width: 100%; } 
     .contact-card { width: 100%; margin-bottom: 15px; }
     .stack-card { padding: 40px 20px; margin-bottom: 20px; } 
     
-    /* Sliders */
     :root { --card-width: 280px; --port-card-width: 280px; } 
     #testimonials { padding: 60px 0; }
     .portfolio-card { height: 200px; }
+    .heading, .cctv-title { font-size: 2.5rem; margin-bottom: 40px; }
+    .detail-grid { margin-top: -50px; }
+}
+/* --- 1. AJUSTE BOTÓN "IR ARRIBA" (Para que no estorbe al WhatsApp) --- */
+#scrollTopBtn {
+    display: none; 
+    position: fixed; 
+    bottom: 100px; /* Lo subimos para dejar espacio al WhatsApp */
+    right: 30px; 
+    z-index: 99;
+    font-size: 1.8rem; 
+    background-color: var(--accent-color); 
+    color: #fff; 
+    padding: 10px 15px; /* Un poco más compacto */
+    border-radius: 10px; 
+    border: none; 
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+    transition: 0.3s;
+}
+#scrollTopBtn:hover { 
+    background-color: #fff; 
+    color: var(--accent-color); 
+    transform: translateY(-5px); 
+}
+
+/* --- 2. BOTÓN FLOTANTE WHATSAPP (LADO DERECHO) --- */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* CAMBIO: Ahora a la derecha */
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 35px;
+    z-index: 1000;
     
-    /* Títulos */
-    .heading { font-size: 2.5rem; margin-bottom: 40px; }
-    .heading::before, .heading::after { font-size: 2rem; }
+    /* Efecto Neón y Sombra */
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+    transition: all 0.3s ease;
+    
+    /* Animación de pulso */
+    animation: pulse-green 2s infinite;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 20px #25d366, 0 0 40px rgba(37, 211, 102, 0.6);
+    background: #128c7e;
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Ajuste Móvil: Los alineamos a la derecha también */
+@media (max-width: 768px) {
+    .whatsapp-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 30px;
+    }
+    #scrollTopBtn {
+        bottom: 90px; /* Ajustado proporcionalmente */
+        right: 20px;
+    }
 }

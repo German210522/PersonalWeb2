@@ -12,8 +12,8 @@
     <meta property="og:url" content="https://german210522.github.io/PersonalWeb2/">
     <meta property="og:type" content="website">
 
-    <link rel="icon" href="Imagenes/safecamg.png">
-    <title>Jz.Dev</title>
+    <link rel="icon" href="Imagenes/safecamg.png" type="image/png">
+    <title>Dev & Infraestructura TI | Jz.Dev</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -53,7 +53,7 @@
 
     <header>
         <a href="#home" class="logo">Jz.Dev</a>
-        <div id="menu-icon"><i class='bx bx-menu'></i></div>
+        <i class='bx bx-menu' id="menu-icon"></i>
         <nav class="navbar">
             <a href="#home">Inicio</a>
             <a href="#about">Sobre mí</a>
@@ -65,29 +65,47 @@
     </header>
 
     <section id="home">
-        <div class="home-content">
+       <div class="home-content">
             <h3>Hola, soy</h3>
-            <h1>German Juárez</h1>
-            <div class="text-animate">
-                <h3>Desarrollador Full Stack</h3>
-            </div>
-            <p>Un especializado en crear soluciones tecnológicas de alto impacto. Diseño arquitecturas robustas y experiencias de usuario fluidas.</p>
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="#contact" class="btn-box">Contactar</a>
-                <a href="https://github.com/German210522" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class='bx bxl-github'></i></a>
-                <a href="https://www.linkedin.com/in/german-juárez-23b990311?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class='bx bxl-linkedin'></i></a>
-            </div>
+    
+            <h1 class="hero-title-anim">German Juárez</h1>
+    
+        <div class="text-animate">
+            <h3>Ingeniero de Software & Estratega TI</h3>
+        </div>
+    
+        <p>
+            Transformo necesidades complejas en soluciones digitales robustas. 
+            Mi enfoque combina la lógica del <strong>Desarrollo Full Stack (.NET)</strong> con la solidez de la <strong>Infraestructura de Redes y Seguridad</strong>.
+        <br><br>
+            Ayudo a negocios a escalar su tecnología con código limpio, arquitecturas seguras y sistemas de vigilancia inteligentes.
+        </p>
+
+        <div style="display: flex; gap: 15px; justify-content: flex-start; flex-wrap: wrap;">
+            <a href="#contact" class="btn-box">Contactar</a>
+            <a href="https://github.com/German210522" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class='bx bxl-github'></i></a>
+            <a href="https://www.linkedin.com/in/german-juárez-23b990311" target="_blank" style="font-size: 2.5rem; color: var(--accent-color); display: flex; align-items: center;"><i class='bx bxl-linkedin'></i></a>
+        </div>
+    </div>
+        <div class="home-img">
+            <img src="Imagenes/perfil2.png" alt="Foto de Perfil">
         </div>
     </section>
 
     <section id="about">
-        <div class="about-img">
-            <img src="Imagenes/perfil2.png" alt="German" class="profile-pic" onerror="this.style.display='none';">
-        </div>
-        <div class="about-content">
+        <div class="about-content" style="text-align: center; max-width: 1000px; margin: 0 auto;">
             <h2 class="heading">Acerca de <span>Mí</span></h2>
-            <h3>¡Ingeniero comprometido!</h3>
-            <p>Soy fundador de <strong>Jz.Dev</strong>. Un apasionado por la innovación que transforma problemas complejos en soluciones tecnológicas sencillas.</p>
+            
+            <h3>¡Ingeniería y Estrategia Digital!</h3>
+            
+            <p style="margin-top: 20px;">
+                Soy fundador de <strong>Jz.Dev</strong> y un ingeniero apasionado por transformar problemas complejos en soluciones tecnológicas eficientes. Con una sólida trayectoria en el ecosistema <strong>.NET y Desarrollo Full Stack</strong>, me especializo en construir aplicaciones que no solo funcionan, sino que escalan y aportan valor real al negocio.
+            </p>
+
+            <p style="margin-bottom: 40px;">
+                Mi perfil es híbrido y versátil: no solo escribo código limpio, sino que entiendo el hardware que lo soporta. Tengo amplia experiencia en <strong>Infraestructura TI, Redes y Seguridad Electrónica (CCTV)</strong>, lo que me permite tener una visión de 360° en cada proyecto. Mi filosofía es simple: tecnología robusta, interfaces intuitivas y seguridad inquebrantable.
+            </p>
+
             <a href="https://drive.google.com/file/d/1ArnZzXLvQqk4hUNw4W_ajC21fmgmWCVJ/view?usp=drive_link" class="btn-box">Descargar CV</a>
         </div>
     </section>
@@ -136,7 +154,7 @@
     </section>
 
    <section id="portfolio">
-        <h2 class="heading">Mi portafolio de <span>Proyectos</span></h2>
+        <h2 class="heading">Mi Portafolio de <span>Proyectos</span></h2>
         <p style="text-align:center; margin-bottom:40px; color:gray; font-size: 1rem;">
             (Desplazamiento automático - Clic para visitar)
         </p>
@@ -144,8 +162,8 @@
         <div class="portfolio-slider">
             <div class="portfolio-track">
                 
-                <a href="https://german210522.github.io/wvl-website/" target="_blank" class="portfolio-card">
-                    <img src="Imagenes/WVL.png" alt="Sitio Web WVL">
+                <a href="https://german210522.github.io/wvl_website2/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/WVL2.jpg" alt="Sitio Web WVL">
                     <div class="portfolio-overlay">
                         <h4>Sitio Web WVL</h4>
                         <p>Desarrollo Estático</p>
@@ -199,8 +217,8 @@
                     </div>
                 </a>
                 
-                <a href="https://german210522.github.io/wvl-website/" target="_blank" class="portfolio-card">
-                    <img src="Imagenes/WVL.png" alt="Sitio Web WVL">
+                <a href="https://german210522.github.io/wvl_website2/" target="_blank" class="portfolio-card">
+                    <img src="Imagenes/WVL2.jpg" alt="Sitio Web WVL">
                     <div class="portfolio-overlay">
                         <h4>Sitio Web WVL</h4>
                         <p>Desarrollo Estático</p>
@@ -222,7 +240,7 @@
     </section>
 
     <section id="testimonials">
-        <h2 class="heading">Lo que dicen <span>mis clientes</span></h2>
+        <h2 class="heading">Lo que dicen <span>Mis Clientes</span></h2>
         
         <div class="slider-container">
             <div class="slider-track">
@@ -352,8 +370,8 @@
             <form id="contact-form" action="https://formspree.io/f/xovglldo" method="POST" class="contact-form">
                 <h3>Envíame un correo directo:</h3>
                 <input type="text" name="name" placeholder="Nombre Completo / Empresa" required>
-                <input type="email" name="email" placeholder="Correo Electrónico Corporativo" required>
-                <textarea name="message" placeholder="Describa su proyecto o requerimiento..." required></textarea>
+                <input type="email" name="email" placeholder="Correo Electrónico" required>
+                <textarea name="message" placeholder="Describe tu requerimiento..." required></textarea>
                 <button type="submit" class="btn-box" style="width: 100%;">Solicitar Cotización</button>
                 <p id="form-status" style="margin-top: 10px; color: var(--accent-cyan); display: none;">Enviando...</p>
             </form>
@@ -365,5 +383,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <a href="https://wa.me/50243072490?text=Hola,%20visité%20tu%20web%20y%20me%20interesa%20más%20información." class="whatsapp-btn" target="_blank">
+        <i class='bx bxl-whatsapp'></i>
+    </a>
 </body>
 </html>
