@@ -169,3 +169,43 @@ const yearSpan = document.getElementById("year");
 if(yearSpan) {
     yearSpan.innerText = new Date().getFullYear();
 }
+
+/* --- DRAG TO SCROLL PARA EL CARRUSEL MANUAL --- */
+const slider = document.querySelector('.portfolio-slider');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+if (slider) {
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.style.cursor = 'grabbing';
+        // Evitamos que el comportamiento suave (smooth) interfiera con el arrastre en tiempo real
+        slider.style.scrollBehavior = 'auto'; 
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+        slider.style.scrollBehavior = 'smooth';
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+        slider.style.scrollBehavior = 'smooth';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault(); // Evita seleccionar texto o arrastrar imágenes
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Multiplicador de velocidad de arrastre
+        slider.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Cursor por defecto
+    slider.style.cursor = 'grab';
+}

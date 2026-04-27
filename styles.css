@@ -452,17 +452,21 @@ section {
 
 /* --- PROYECTOS (CARRUSEL) --- */
 .portfolio-slider {
-    width: 100%; overflow: hidden; position: relative; padding: 20px 0;
-    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    width: 100%; overflow-x: auto; overflow-y: hidden; position: relative; padding: 20px 0;
+    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE y Edge */
+}
+.portfolio-slider::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
 }
 .portfolio-track {
     display: flex; gap: var(--port-card-gap);
-    width: calc((var(--port-card-width) + var(--port-card-gap)) * 8); 
-    animation: scroll-portfolio 50s linear infinite;
+    width: max-content;
+    padding: 0 5%;
 }
-.portfolio-track:hover { animation-play-state: paused; }
-@keyframes scroll-portfolio { 0% { transform: translateX(0); } 100% { transform: translateX(calc((var(--port-card-width) + var(--port-card-gap)) * -4)); } }
 
 .portfolio-card {
     position: relative; width: var(--port-card-width); height: 250px; flex-shrink: 0; border-radius: 10px; overflow: hidden;
