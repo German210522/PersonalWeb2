@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://german210522.github.io/PersonalWeb2/sitemap.xml
